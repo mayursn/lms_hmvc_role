@@ -213,6 +213,7 @@ class Digital extends MY_Controller {
         $course = $this->input->post('course');
         $batch = $this->input->post('batch');
         $semester = $this->input->post("semester");
+<<<<<<< HEAD
         $data['course'] = $this->Course_model->order_by_column('c_name');
         $data['semester'] = $this->Semester_model->order_by_column('s_name');
         $data['batch'] = $this->Batch_model->order_by_column('b_name');
@@ -220,31 +221,56 @@ class Digital extends MY_Controller {
 
         if ($degree == "All") {
           $data['library'] =  $this->Library_manager_model->order_by_column('created_date');
+=======
+        $this->data['course'] = $this->Course_model->order_by_column('c_name');
+        $this->data['semester'] = $this->Semester_model->order_by_column('s_name');
+        $this->data['batch'] = $this->Batch_model->order_by_column('b_name');
+        $this->data['degree'] = $this->Degree_model->order_by_column('d_name');
+
+        if ($degree == "All") {
+          $this->data['library'] =  $this->Library_manager_model->order_by_column('created_date');
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         } else {
             if ($course == "All") {
                 $this->db->select('lm_id, lm_title, lm_degree, lm_batch, lm_course, lm_url, lm_semester, lm_filename');
                 $this->db->where("lm_degree", $degree);
+<<<<<<< HEAD
                 $data['library'] = $this->db->get('library_manager')->result();
+=======
+                $this->data['library'] = $this->db->get('library_manager')->result();
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             } else {
                 if ($batch == 'All') {
                     $this->db->select('lm_id, lm_title, lm_degree, lm_batch, lm_course, lm_url, lm_semester, lm_filename');
                     $this->db->where("lm_course", $course);
                     $this->db->where("lm_degree", $degree);
+<<<<<<< HEAD
                     $data['library'] = $this->db->get('library_manager')->result();
+=======
+                    $this->data['library'] = $this->db->get('library_manager')->result();
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 } else {
                     if ($semester == "All") {
                         $this->db->select('lm_id, lm_title, lm_degree, lm_batch, lm_course, lm_url, lm_semester, lm_filename');
                         $this->db->where("lm_batch", $batch);
                         $this->db->where("lm_course", $course);
                         $this->db->where("lm_degree", $degree);
+<<<<<<< HEAD
                         $data['library'] = $this->db->get('library_manager')->result();
+=======
+                        $this->data['library'] = $this->db->get('library_manager')->result();
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                     } else {
                         $this->db->select('lm_id, lm_title, lm_degree, lm_batch, lm_course, lm_url, lm_semester, lm_filename');
                         $this->db->where("lm_semester", $semester);
                         $this->db->where("lm_batch", $batch);
                         $this->db->where("lm_course", $course);
                         $this->db->where("lm_degree", $degree);
+<<<<<<< HEAD
                         $data['library'] = $this->db->get('library_manager')->result();
+=======
+                        $this->data['library'] = $this->db->get('library_manager')->result();
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                     }
                 }
             }
@@ -252,7 +278,11 @@ class Digital extends MY_Controller {
 
 
 
+<<<<<<< HEAD
         $this->load->view("digital/getlibrary", $data);
+=======
+        $this->load->view("digital/getlibrary", $this->data);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
 
     
@@ -264,6 +294,7 @@ class Digital extends MY_Controller {
      * @param string $param
      */
     function get_cource($param = '') {
+<<<<<<< HEAD
         $did = $this->input->post("degree");
         if ($did != '') {
             if ($did == "All") {
@@ -281,6 +312,12 @@ class Digital extends MY_Controller {
                 echo $html;
             }
         }
+=======
+        
+        $did = $this->input->post("degree");
+         $cource = $this->db->get_where("course", array("degree_id" => $did))->result_array();
+        echo json_encode($cource);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
 
     /**
@@ -290,6 +327,7 @@ class Digital extends MY_Controller {
     function get_batchs($param = '') {
         $cid = $this->input->post("course");
         $did = $this->input->post("degree");
+<<<<<<< HEAD
         $html = '';
         if ($cid != '') {
             if ($cid == "All") {
@@ -307,6 +345,10 @@ class Digital extends MY_Controller {
             }
             echo $html;
         }
+=======
+        $batch = $this->db->query("SELECT * FROM batch WHERE FIND_IN_SET('" . $did . "',degree_id) AND FIND_IN_SET('" . $cid . "',course_id)")->result_array();
+        echo json_encode($batch);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
 
     /**
@@ -331,6 +373,7 @@ class Digital extends MY_Controller {
                 $semdata[] = $sem;
             }
         }
+<<<<<<< HEAD
         $option = "<option value=''>Select semester</option>";
         $option .="<option value='All'>All</option>";
 
@@ -338,6 +381,9 @@ class Digital extends MY_Controller {
             $option .="<option value=" . $s['s_id'] . ">" . $s['s_name'] . "</option>";
         }
         echo $option;
+=======
+        echo json_encode($semdata);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
     
     /**
@@ -346,6 +392,7 @@ class Digital extends MY_Controller {
      */
     function get_cource_all($param = '') {
         $did = $this->input->post("degree");
+<<<<<<< HEAD
         $html = '';
         if ($did != '') {
             if ($did == "All") {
@@ -366,6 +413,11 @@ class Digital extends MY_Controller {
             }
         }
         echo $html;
+=======
+        $this->load->model('branch/Course_model');
+       $cource = $this->Course_model->get_many_by(array("degree_id" => $did));
+       echo json_encode($cource);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
     
     
@@ -376,6 +428,7 @@ class Digital extends MY_Controller {
     function get_batchs_all($param = '') {
         $cid = $this->input->post("course");
         $did = $this->input->post("degree");
+<<<<<<< HEAD
         $html = '';
         if ($cid != '') {
             if ($cid == "All") {
@@ -394,6 +447,11 @@ class Digital extends MY_Controller {
             }
             echo $html;
         }
+=======
+        $this->load->model('batch/Batch_model');
+       $batch = $this->Batch_model->department_branch_batch($did,$cid);
+        echo json_encode($batch);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
 
 }

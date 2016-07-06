@@ -60,7 +60,11 @@ class Courseware extends MY_Controller {
                 $insert['subject_id'] = $this->input->post('subject');
                 $insert['chapter'] = $this->input->post('chapter');
                 $insert['status'] = $this->input->post('status');
+<<<<<<< HEAD
                 $insert['professor_id'] = $this->session->userdata('login_user_id');
+=======
+                $insert['professor_id'] = $this->session->userdata('role_id');
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 $insert['created_date'] = date('Y-m-d');
 
                 $this->Courseware_model->insert($insert);
@@ -164,6 +168,7 @@ class Courseware extends MY_Controller {
     }
     
      function getcourseware($param1 = "") {
+<<<<<<< HEAD
         if ($param1 = "edit") {
             $this->db->where('branch_id', $this->input->post('branch'));
             $this->db->where('subject_id', $this->input->post('subject'));
@@ -171,6 +176,18 @@ class Courseware extends MY_Controller {
             $this->db->where('topic', $this->input->post('topic'));
             $this->db->where_not_in('courseware_id', $this->input->post('editid'));
             $data = $this->db->get('courseware')->result();
+=======
+        if ($param1 == "edit") {
+            $branch = $this->input->post('branch');
+            $subject = $this->input->post('subject');
+            $chapter = $this->input->post('chapter');
+            $topic = $this->input->post('topic');
+            $editid =  $this->input->post('editid');
+           
+            
+             $data = $this->Courseware_model->get_courseware_array($branch,$subject,$chapter,$topic,$editid);
+          
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 //            echo $this->db->last_query();
 //            print_r($data);
 //            exit;
@@ -180,11 +197,21 @@ class Courseware extends MY_Controller {
                 echo 'true';
             }
         }else{
+<<<<<<< HEAD
             $this->db->where('branch_id', $this->input->post('branch'));
             $this->db->where('subject_id', $this->input->post('subject'));
             $this->db->where('chapter', $this->input->post('chapter'));
             $this->db->where('topic', $this->input->post('topic'));
             $data = $this->db->get('courseware')->result();
+=======
+            $branch =  $this->input->post('branch');
+            $subject =  $this->input->post('subject');
+            $chapter =  $this->input->post('chapter');
+            $topic =  $this->input->post('topic');
+            
+            
+            $data = $this->Courseware_model->get_duplicate($branch,$subject,$chapter,$topic);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
             if (count($data) > 0) {
                 echo 'false';
@@ -193,5 +220,29 @@ class Courseware extends MY_Controller {
             }
         }
     }
+<<<<<<< HEAD
+=======
+    
+    function getcoursewareedit()
+    {
+         $branch = $this->input->post('branch');
+            $subject = $this->input->post('subject');
+            $chapter = $this->input->post('chapter');
+            $topic = $this->input->post('topic');
+            $editid =  $this->input->post('editid');
+           
+            
+             $data = $this->Courseware_model->get_courseware_array($branch,$subject,$chapter,$topic,$editid);
+          
+//            echo $this->db->last_query();
+//            print_r($data);
+//            exit;
+            if (count($data) > 0) {
+                echo 'false';
+            } else {
+                echo 'true';
+            }
+    }
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
 }

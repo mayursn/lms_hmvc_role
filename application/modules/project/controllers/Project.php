@@ -25,11 +25,19 @@ class Project extends MY_Controller {
         $this->data['title'] = 'Project';
         $this->data['page'] = 'project';
         $this->data['project'] = $this->Project_manager_model->order_by_column('pm_dos');
+<<<<<<< HEAD
         $this->data['submitedproject'] = $this->Crud_model->get_all_submitted_project();
         $this->data['degree'] = $this->Crud_model->get_all_degree_optimize();
         $this->data['batch'] = $this->Crud_model->get_all_batch_optimize();
         $this->data['course'] = $this->Crud_model->get_all_course_optimize();
         $this->data['semester'] = $this->Crud_model->get_all_semester_optimize();
+=======
+        $this->data['submitedproject'] = $this->Project_document_submission_model->get_all_submitted_project();
+        $this->data['degree'] = $this->Degree_model->get_all();
+        $this->data['batch'] = $this->Batch_model->order_by_column('b_name');
+        $this->data['course'] = $this->Course_model->order_by_column('c_name');;
+        $this->data['semester'] = $this->Semester_model->order_by_column('s_name');
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
         $this->data['student'] = $this->db->select('std_id, std_first_name, std_last_name')->from('student')->get()->result();
 
@@ -38,6 +46,10 @@ class Project extends MY_Controller {
 
     function create() {
         if ($_POST) {
+<<<<<<< HEAD
+=======
+           
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             $checkstd = $this->input->post('student');
             if (empty($checkstd)) {
                 $this->session->set_flashdata('flash_message', "Student not found, data not added!");
@@ -164,14 +176,21 @@ class Project extends MY_Controller {
     function update($id = '') {
         $data = array();
         if ($_POST) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             $checkstd = $this->input->post('student');
             if (empty($checkstd)) {
                 $this->session->set_flashdata('flash_message', "Student not found, data not added!");
                 redirect(base_url() . 'project/', 'refresh');
             }
             $this->db->select('pm_filename');
+<<<<<<< HEAD
             $res_file = $this->db->get_where('project_manager', array("pm_id" => $param2))->row();
+=======
+            $res_file = $this->db->get_where('project_manager', array("pm_id" => $id))->row();
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             if ($_FILES['projectfile']['name'] != "") {
                 if (!empty($_FILES['projectfile']['name'][0])) {
                     $allowed_type = "gif|jpg|png|doc|docx|pdf|zip|rar";
@@ -271,7 +290,11 @@ class Project extends MY_Controller {
             $data['pm_course'] = $this->input->post('course');
 
             $this->Project_manager_model->update($id, $data);
+<<<<<<< HEAD
             $this->session->set_flashdata('flash_message',"Project is successfully updated.");
+=======
+            $this->session->set_flashdata('flash_message', "Project is successfully updated.");
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             redirect(base_url() . 'project/', 'refresh');
         }
 
@@ -283,11 +306,19 @@ class Project extends MY_Controller {
      * @param String $param
      */
     function getprojects($param = '') {
+<<<<<<< HEAD
         $data['degree'] = $this->Degree_model->order_by_column('d_name');
         $data['course'] = $this->Course_model->order_by_column('c_name');
         $data['batch'] = $this->Batch_model->order_by_column('b_name');
         $data['semester'] = $this->Semester_model->order_by_column('s_name');
         $data['class'] = $this->Class_model->order_by_column('class_name');
+=======
+        $this->data['degree'] = $this->Degree_model->order_by_column('d_name');
+        $this->data['course'] = $this->Course_model->order_by_column('c_name');
+        $this->data['batch'] = $this->Batch_model->order_by_column('b_name');
+        $this->data['semester'] = $this->Semester_model->order_by_column('s_name');
+        $this->data['class'] = $this->Class_model->order_by_column('class_name');
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
 
         if ($param == 'allproject') {
@@ -296,27 +327,46 @@ class Project extends MY_Controller {
             $batch = $this->input->post('batch');
             $semester = $this->input->post("semester");
             $class = $this->input->post("divclass");
+<<<<<<< HEAD
             $data['student'] = $this->db->select('std_id, name, email, std_first_name, std_last_name')->from('student')->get()->result();
+=======
+            $this->data['student'] = $this->db->select('std_id, name, email, std_first_name, std_last_name')->from('student')->get()->result();
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             $get_by_many = array("pm_degree" => $degree,
                 "pm_course" => $course,
                 "pm_batch" => $batch,
                 "pm_semester" => $semester,
                 "class_id" => $class);
+<<<<<<< HEAD
             $data['project'] = $this->Project_manager_model->get_many_by($get_by_many);
 
             $data['param'] = $param;
 
             $this->load->view("project/getprojects", $data);
+=======
+            $this->data['project'] = $this->Project_manager_model->get_many_by($get_by_many);
+
+            $this->data['param'] = $param;
+
+            $this->load->view("project/getprojects", $this->data);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         }
         if ($param == 'submitted') {
             $degree = $this->input->post('degree');
             $course = $this->input->post('course');
             $batch = $this->input->post('batch');
             $semester = $this->input->post("semester");
+<<<<<<< HEAD
             $data['student'] = $this->db->select('std_id, email, name, std_first_name, std_last_name')->from('student')->get()->result();
             $data['submitedproject'] = $this->Project_document_submission_model->get_submitted_project($degree, $course, $batch, $semester);
             $data['param'] = $param;
             $this->load->view("project/getprojects", $data);
+=======
+            $this->data['student'] = $this->db->select('std_id, email, name, std_first_name, std_last_name')->from('student')->get()->result();
+            $this->data['submitedproject'] = $this->Project_document_submission_model->get_submitted_project($degree, $course, $batch, $semester);
+            $this->data['param'] = $param;
+            $this->load->view("project/getprojects", $this->data);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         }
     }
 
@@ -437,4 +487,130 @@ class Project extends MY_Controller {
         echo json_encode($res);
     }
 
+<<<<<<< HEAD
+=======
+    function submission() {
+        $this->load->model('student/Student_model');
+        $std_id = $this->session->userdata('std_id');        
+        $std = $this->Student_model->get($std_id);
+        $degree = $std->std_degree;
+        $batch = $std->std_batch;
+        $sem = $std->semester_id;
+        $course = $std->course_id;        
+        $class = $std->class_id;        
+        
+        $this->data['project'] =  $this->Project_manager_model->get_student_project_list($degree,$batch,$sem,$course,$class,$std_id);
+                //$this->data['project'] = 
+        // $page_data['project'] = $this->db->get_where('project_manager', array("pm_student_id" => $this->session->userdata('std_id')))->result();           
+        //$this->data['student'] = $this->db->get('student')->result();
+        $this->data['page'] = 'project';
+        $this->data['title'] = 'Projects';
+        $this->data['param'] = "submission";
+        clear_notification('project_manager', $this->session->userdata('std_id'));
+        unset($this->session->userdata('notifications')['project_manager']);
+        $this->__template('project/submission', $this->data);
+    }
+    
+    function submit_project()
+    {
+        if($_POST)
+        {
+            if ($_FILES['document_file']['name'] != "") {
+                    $allowed_type= "gif|jpg|png|doc|docx|pdf|zip|rar";
+                    $all_type = explode("|",$allowed_type);
+                    $n_number_of_file = sizeof($_FILES['document_file']['name']);
+                    for($j=0;$j<count($_FILES['document_file']['name']);$j++)
+                    {
+                        $p_file_ext = explode(".", $_FILES['document_file']['name'][$j]);
+                        $p_ext_file = strtolower(end($p_file_ext));
+                        if(!in_array($p_ext_file, $all_type))
+                        {
+                            $this->flash_notification("Invalid File!");
+                            redirect(base_url().'project/submission');
+                        }
+                        
+                    }
+                
+                    
+                // retrieve the number of images uploaded;
+                $number_of_files = sizeof($_FILES['document_file']['tmp_name']);
+                // considering that do_upload() accepts single files, we will have to do a small hack so that we can upload multiple files. For this we will have to keep the data of uploaded files in a variable, and redo the $_FILE.
+                $files = $_FILES['document_file'];
+                $errors = array();
+
+                // first make sure that there is no error in uploading the files
+                for ($i = 0; $i < $number_of_files; $i++) {
+                    if ($_FILES['document_file']['error'][$i] != 0)
+                        $errors[$i][] = 'Couldn\'t upload file ' . $_FILES['document_file']['name'][$i];
+                }
+                if (sizeof($errors) == 0) {
+                    // now, taking into account that there can be more than one file, for each file we will have to do the upload
+                    // we first load the upload library
+                    $this->load->library('upload');
+                    if (!is_dir(FCPATH . 'uploads/photogallery')) {
+                        $path = FCPATH . 'uploads/photogallery';
+                        mkdir($path, 0777);
+                    }
+                    // next we pass the upload path for the images
+                    $config['upload_path'] = FCPATH . 'uploads/project_file';
+                    // also, we make sure we allow only certain type of images
+                    $config['allowed_types'] = 'gif|jpg|png|doc|docx|pdf|zip|rar';
+                    for ($i = 0; $i < $number_of_files; $i++) {
+                        $_FILES['document_file']['name'] = $files['name'][$i];
+                        $_FILES['document_file']['type'] = $files['type'][$i];
+                        $_FILES['document_file']['tmp_name'] = $files['tmp_name'][$i];
+                        $_FILES['document_file']['error'] = $files['error'][$i];
+                        $_FILES['document_file']['size'] = $files['size'][$i];
+
+                        $file_ext = explode(".", $_FILES['document_file']['name']);
+                        $ext_file = strtolower(end($file_ext));
+                        $config['file_name'] = $i . date('dmYhis') . '.' . $ext_file;
+
+                        //now we initialize the upload library
+                        $this->upload->initialize($config);
+                        // we retrieve the number of files that were uploaded
+                        if ($this->upload->do_upload('document_file')) {
+                            $sdata['uploads'][$i] = $this->upload->data();
+                        } else {
+                            $sdata['upload_errors'][$i] = $this->upload->display_errors();
+                        }
+                    }
+                } else {
+                    $error = $this->lang_message('invalid_image');
+                    $this->flash_notification($error);
+                    redirect(base_url() . 'project/submission');
+                }
+
+                $upload_files = $sdata['uploads'];
+                for ($u = 0; $u < count($upload_files); $u++) {
+                    $uploaded_file[] = $upload_files[$u]['file_name'];
+                }
+
+                if (!empty($uploaded_file)) {
+                    $data['document_file'] = implode(",", $uploaded_file);
+                    
+                } else {
+                    $data['document_file'] = '';
+                }
+
+                } else {
+
+                   
+                }
+                
+
+                
+            $data['description'] = $this->input->post('comment');
+            $data['project_id'] = $this->input->post('project_id');
+            $data['student_id'] = $this->session->userdata('std_id');
+            $data['dos'] = date('Y-m-d');
+            
+            $this->Project_document_submission_model->insert( $data);
+            $this->flash_notification('Project added successfully');
+            redirect(base_url() . 'project/submission', 'refresh');
+            
+        }
+    }
+
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 }

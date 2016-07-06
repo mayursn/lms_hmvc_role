@@ -28,8 +28,13 @@
                                 <select name="degree" id="degree" class="form-control" >
                                     <option value="">Select department</option>
                                     <?php
+<<<<<<< HEAD
                                     $this->db->order_by('d_name','asc');
                                     $datadegree = $this->db->get_where('degree', array('d_status' => 1))->result();
+=======
+                                     $this->load->model('department/Degree_model');
+                                    $datadegree = $this->Degree_model->order_by_column('d_name');
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                     foreach ($datadegree as $rowdegree) {
                                         ?>
                                         <option value="<?= $rowdegree->d_id ?>"><?= $rowdegree->d_name ?></option>
@@ -144,6 +149,10 @@
         $("#student").html('');
         $('#semester').prop('selectedIndex', 0);
         $('#class').prop('selectedIndex', 0);
+<<<<<<< HEAD
+=======
+        
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     });
     $('#semester').change(function () {
         $("#student").html('');
@@ -202,7 +211,11 @@
             });
         }
 
+<<<<<<< HEAD
         function semester_from_branch(branch) {
+=======
+        function semester_from_branch(branch) {        
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             $('#semester').find('option').remove().end();
             $('#semester').append('<option value>Select</option>');
             $.ajax({

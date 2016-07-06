@@ -13,7 +13,10 @@ class Modal extends MY_Controller {
         parent::__construct();
         $this->load->model('Crud_model');
         $this->load->model('Professor_model');
+<<<<<<< HEAD
         $this->load->model('forum_model');
+=======
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
 
     /**
@@ -27,7 +30,11 @@ class Modal extends MY_Controller {
         $page_name = '';
 
         $filter = array(
+<<<<<<< HEAD
             'user', 'media'
+=======
+            'user', 'media','subject'
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         );
 
         if (in_array($module_page[0], $filter)) {

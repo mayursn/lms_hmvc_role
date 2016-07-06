@@ -3,6 +3,7 @@
 
     <div class=col-lg-12>
         <!-- col-lg-12 start here -->
+<<<<<<< HEAD
         <div class="panel-default toggle panelMove panelClose panelRefresh">      
             <div class=panel-body>
                 <div class="row filter-row">
@@ -67,12 +68,143 @@
                 </div>
                 <div id="student-attendance-list">
                     <div class="col-md-12">
+=======
+        <div class="panel-default toggle panelMove panelClose panelRefresh">
+            <!-- Start .panel -->
+            <!--            <div class=panel-heading>
+                            <h4 class=panel-title><?php echo $title; ?></h4>
+                            <div class="panel-controls panel-controls-right">
+                                <a class="panel-refresh" href="#"><i class="fa fa-refresh s12"></i></a>
+                                <a class="toggle panel-minimize" href="#"><i class="fa fa-plus s12"></i></a>
+                                <a class="panel-close" href="#"><i class="fa fa-times s12"></i></a>
+                            </div>
+                        </div>-->
+            <div class=panel-body>
+                <div class="row filter-row">
+                    <form id="attendance-routine" action="#" method="post" class="form-groups-bordered form-horizontal validate">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Date<span style="color:red">*</span></label>
+                            <div class="col-sm-6">
+                                <input id="date" type="text" class="form-control datepicker-normal" name="date" placeholder="Select"
+                                       value="<?php echo $date; ?>"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6 col-md-offset-2">
+                                <input id="search-exam-data" type="submit" value="Submit" class="btn btn-info vd_bg-green"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="student-attendance-list">
+                    <div class="col-md-12">
+                        <?php if (count($professor_class_routine_list)) { ?>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        <h4>Class Routine List</h4>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <table id="class-routine-list" class="table table-bordered table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <td>No</td>
+                                                <th>Department</th>
+                                                <th>Branch</th>
+                                                <th>Semester</th>
+                                                <th>Class</th>
+                                                <th>Subject</th>
+                                                <th>Time</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <?php
+                                            $counter = 1;
+                                            foreach ($professor_class_routine_list as $routine) {
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $counter++; ?></td>
+                                                    <td><?php echo $routine->d_name; ?></td>
+                                                    <td><?php echo $routine->c_name; ?></td>
+                                                    <td><?php echo $routine->s_name; ?></td>
+                                                    <td><?php echo $routine->class_name; ?></td>
+                                                    <td><?php echo $routine->subject_name; ?></td>                                                    
+                                                    <td><?php 
+                                                        echo date('h:i A', strtotime($routine->Start)) . ' - ' .
+                                                        date('h:i A', strtotime($routine->End));
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        $this->load->model('attendance/Attendance_model');
+                                                        $status = $this->Attendance_model->class_routine_status($routine->ClassRoutineId, date('Y-m-d', strtotime($date)));
+                                                        ?>
+
+                                                        <?php
+                                                        if ($status) {
+                                                            echo 'Done';
+                                                        } else {
+                                                            echo 'Pending';
+                                                        }
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <a href="<?php echo base_url(); ?>attendance/take_attedance/<?php echo $routine->ClassRoutineId; ?>/<?php echo date('Y-m-d', strtotime($date)) ?>">
+                                                            <span class="label label-primary mr6 mb6">
+                                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                                Attendance
+                                                            </span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        <?php } else { ?>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-title">Class Routine List</div>
+                                </div>
+                                <div class="panel-body">
+                                    <table id="class-routine-list" class="table table-bordered table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <td>No</td>
+                                                <th>Department</th>
+                                                <th>Branch</th>
+                                                <th>Semester</th>
+                                                <th>Class</th>
+                                                <th>Subject</th>
+                                                <th>Time</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        <?php } ?>
+
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                         <?php if (count($student)) { ?>
                             <?php
                             $this->load->model('admin/Crud_model');
                             ?>
                             <br/>
+<<<<<<< HEAD
                             <form method="post" action="<?php echo base_url(); ?>professor/take_class_routine_attendance"
+=======
+                            <form method="post" action="<?php echo base_url(); ?>attendance/take_class_routine_attendance"
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                   class="form-groups-bordered">
                                 <input type="hidden" name="department" value="<?php echo $department; ?>"/>
                                 <input type="hidden" name="branch" value="<?php echo $branch; ?>"/>
@@ -86,7 +218,11 @@
                                     <div class="panel-heading">
                                         <div class="panel-title">
                                             <h4>Student List</h4>
+<<<<<<< HEAD
                                             
+=======
+
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                         </div>
                                     </div>
                                     <div class="panel-body">                                        
@@ -147,6 +283,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+<<<<<<< HEAD
         "use strict";
         var department_id = '<?php echo $department; ?>';
         var branch_id = '<?php echo $branch; ?>';
@@ -190,6 +327,11 @@
         });
         
         
+=======
+        $('#class-routine-list').DataTable({});
+        "use strict";
+
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         $("#attendance-routine").validate({
             rules: {
                 'department': "required",
@@ -210,6 +352,7 @@
                 'class_routine': "Select class routine"
             }
         });
+<<<<<<< HEAD
         
         $(".datepicker-normal").datepicker({
             format: ' MM d, yyyy',
@@ -310,5 +453,14 @@
             });
         }
 
+=======
+  var js_format = '<?php echo js_dateformat(); ?>';
+        $(".datepicker-normal").datepicker({
+            format: js_format,
+            todayHighlight: true,
+            autoclose: true
+
+        });
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     });
 </script>

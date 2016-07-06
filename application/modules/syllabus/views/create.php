@@ -1,4 +1,9 @@
 <?php
+<<<<<<< HEAD
+=======
+$this->load->model('department/Degree_model');
+$degree = $this->Degree_model->get_all();
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 $this->load->Model('branch/Course_model');
 $this->load->Model('semester/Semester_model');
 $data['course'] = $this->Course_model->order_by_column('c_name');
@@ -32,7 +37,11 @@ $data['semester'] = $this->Semester_model->order_by_column('s_name');
                                 <select name="degree" class="form-control" id="degree">
                                     <option value="">Select Department</option>
                                     <?php
+<<<<<<< HEAD
                                     $degree = $this->db->order_by('d_name', 'ASC')->get_where('degree', array('d_status' => 1))->result();
+=======
+                                  
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                     foreach ($degree as $dgr) {
                                         ?>
                                         <option value="<?= $dgr->d_id ?>"><?= $dgr->d_name ?></option>

@@ -1,6 +1,14 @@
 <?php
+<<<<<<< HEAD
 $edit_data = $this->db->get_where('smart_syllabus', array('syllabus_id' => $param2))->result_array();
 foreach ($edit_data as $row):
+=======
+$this->load->model('syllabus/Smart_syllabus_model');
+$this->load->model('branch/Course_model');
+$this->load->model('department/Degree_model');
+$row = $this->Smart_syllabus_model->get($param2);
+
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     ?>
 <div class=row>                      
     <div class=col-lg-12>
@@ -16,11 +24,19 @@ foreach ($edit_data as $row):
                             <div class="">
                                     <span style="color:red">* <?php echo "is ".ucwords("mandatory field");?></span> 
                                 </div>   
+<<<<<<< HEAD
                             <?php echo form_open(base_url() . 'syllabus/update/' . $row['syllabus_id'], array('class' => 'form-horizontal form-groups-bordered validate', 'id' => 'frmeditsyllabus', 'target' => '_top', 'enctype' => 'multipart/form-data')); ?>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label"><?php echo ucwords("Syllabus title");?><span style="color:red">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="title" id="title" value="<?php echo $row['syllabus_title']; ?>" />
+=======
+                            <?php echo form_open(base_url() . 'syllabus/update/' . $row->syllabus_id, array('class' => 'form-horizontal form-groups-bordered validate', 'id' => 'frmeditsyllabus', 'target' => '_top', 'enctype' => 'multipart/form-data')); ?>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label"><?php echo ucwords("Syllabus title");?><span style="color:red">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="title" id="title" value="<?php echo $row->syllabus_title; ?>" />
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                 </div>
                             </div>
                              <div class="form-group">
@@ -29,10 +45,17 @@ foreach ($edit_data as $row):
                                                 <select name="degree" class="form-control"  id="degree2">
                                                     <option value="">Select department</option>
                                                     <?php
+<<<<<<< HEAD
                                                     $degree = $this->db->order_by('d_name', 'ASC')->get_where('degree', array('d_status' => 1))->result();
                                                     foreach ($degree as $dgr) {
                                                         ?>
                                                     <option value="<?= $dgr->d_id ?>" <?php if($row['syllabus_degree']==$dgr->d_id){  echo "selected=selected"; } ?>><?= $dgr->d_name ?></option>
+=======
+                                                  $degree =  $this->Degree_model->get_all();
+                                                    foreach ($degree as $dgr) {
+                                                        ?>
+                                                    <option value="<?= $dgr->d_id ?>" <?php if($row->syllabus_degree==$dgr->d_id){  echo "selected=selected"; } ?>><?= $dgr->d_name ?></option>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                         <?php
                                                     }
                                                     ?>
@@ -45,9 +68,15 @@ foreach ($edit_data as $row):
                                     <select name="course" class="form-control"  id="course2">
                                         <option value="">Select Branch</option>
                                         <?php
+<<<<<<< HEAD
                                         $course = $this->db->get_where('course', array('course_status' => 1,'degree_id'=>$row['syllabus_degree']))->result();
                                         foreach ($course as $crs) {
                                             if ($crs->course_id == $row['syllabus_course']) {
+=======
+                                        $course = $this->Course_model->get_all();
+                                        foreach ($course as $crs) {
+                                            if ($crs->course_id == $row->syllabus_course) {
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 ?>
                                                 <option value="<?= $crs->course_id ?>" selected><?= $crs->c_name ?></option>
                                                 <?php
@@ -68,9 +97,16 @@ foreach ($edit_data as $row):
                                     <select name="semester" class="form-control"  id="semester1">
                                         <option value="">Select semester</option>
                                         <?php
+<<<<<<< HEAD
                                         $datasem = $this->db->get_where('semester', array('s_status' => 1))->result();
                                         foreach ($datasem as $rowsem) {
                                             if ($rowsem->s_id == $row['syllabus_sem']) {
+=======
+                                        $this->load->model('semester/Semester_model');
+                                        $datasem = $this->Semester_model->get_all();
+                                        foreach ($datasem as $rowsem) {
+                                            if ($rowsem->s_id == $row->syllabus_sem) {
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 ?>
                                                 <option value="<?= $rowsem->s_id ?>" selected><?= $rowsem->s_name ?></option>
                                                     <?php
@@ -89,13 +125,21 @@ foreach ($edit_data as $row):
                             <div class="form-group">
                                 <label class="col-sm-4 control-label"><?php echo ucwords("Description");?></label>
                                 <div class="col-sm-8">
+<<<<<<< HEAD
                                     <textarea class="form-control" name="description" id="description"><?php echo $row['syllabus_desc']; ?></textarea>
+=======
+                                    <textarea class="form-control" name="description" id="description"><?php echo $row->syllabus_desc; ?></textarea>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label"><?php echo ucwords("File Upload");?></label>
                                 <div class="col-sm-8">
+<<<<<<< HEAD
                                     <input type="hidden" name="txtoldfile" id="txtoldfile" value="<?php echo $row['syllabus_filename']; ?>" />
+=======
+                                    <input type="hidden" name="txtoldfile" id="txtoldfile" value="<?php echo $row->syllabus_filename; ?>" />
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                     <input type="file" class="form-control" name="syllabusfile" id="syllabusfile" />
                                 </div>
                             </div>
@@ -110,9 +154,12 @@ foreach ($edit_data as $row):
         </div>
     </div>
 
+<<<<<<< HEAD
     <?php
 endforeach;
 ?>
+=======
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
 <script type="text/javascript">  
     $(document).ready(function(){

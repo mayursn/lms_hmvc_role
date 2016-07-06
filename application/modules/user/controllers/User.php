@@ -12,6 +12,11 @@ class User extends MY_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('user/User_model');
+<<<<<<< HEAD
+=======
+        $this->load->model('todo/Todo_list_model');
+        $this->load->model('professor/Professor_model');
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
 
     /**
@@ -57,11 +62,35 @@ class User extends MY_Controller {
             );
 
             if ($user) {
+<<<<<<< HEAD
                 $session_data = array(
                     'user_id' => $user->user_id,
                     'email' => $user->email,
                     'first_name' => $user->first_name,
                     'last_name' => $user->last_name,
+=======
+                if ($user->role->role_id == "3") {
+                    $this->load->model('student/Student_model');
+                    $user_id = $user->user_id;
+                    $this->db->where("user_id", $user_id);
+                    $std = $this->db->get("student")->row()->std_id;
+                    
+                    $this->session->set_userdata("std_id", $std);
+                   
+                }
+
+                if ($user->role->role_id == "2") {
+                    $this->load->model('professor/Professor_model');
+                    $user_id = $user->user_id;
+                    $this->db->where("user_id", $user_id);
+                    $professor = $this->db->get("professor")->row();
+                    $this->session->set_userdata("professor_id", $professor->professor_id);
+                    $this->session->set_userdata("professor_department", $professor->department);
+                }
+                $session_data = array(
+                    'user_id' => $user->user_id,
+                    'email' => $user->email,
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                     'is_logged_in' => TRUE,
                     'role_id' => $user->role->role_id,
                     'role_name' => $user->role->role_name
@@ -95,9 +124,32 @@ class User extends MY_Controller {
         $this->redirect_if_user_not_logged_in();
         $this->data['title'] = 'Dashboard';
         $this->data['page'] = 'dashboard';
+<<<<<<< HEAD
         $this->data['todolist'] = $this->Crud_model->get_todo();
         $this->data['timeline'] = $this->Crud_model->get_timline();
         $this->__template('user/user/dashboard', $this->data);
+=======
+        $this->data['todolist'] = $this->Todo_list_model->get_todo();
+
+        if ($this->session->userdata('std_id')) {
+            $this->data['timeline'] = $this->Crud_model->get_timline();
+            redirect(base_url() . 'student/dashboard');
+        } elseif ($this->session->userdata('professor_id')) {
+            redirect(base_url() . 'professor/dashboard');
+        } else {
+
+            $this->load->helper('report_chart');
+
+            $this->data['new_student_joining'] = new_student_registration();
+            $this->data['male_vs_female_course_wise'] = male_vs_female_course_wise();
+            $this->calendar_json();
+            $this->data['todolist'] = $this->Todo_list_model->get_todo();
+            $this->data['recent_professor'] = $this->Professor_model->get_recent_professor();
+            $this->data['title'] = 'Dashboard';
+            $this->data['page'] = 'dashboard';
+            $this->__template('user/user/dashboard', $this->data);
+        }
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
 
     /**
@@ -113,6 +165,7 @@ class User extends MY_Controller {
         
     }
 
+<<<<<<< HEAD
     /**
      * Forgot password
      */
@@ -243,6 +296,10 @@ class User extends MY_Controller {
         } else {
             show_404();
         }
+=======
+    function forgot_password() {
+        
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
 
     /**
@@ -256,6 +313,7 @@ class User extends MY_Controller {
     }
 
     /**
+<<<<<<< HEAD
      * Compare reset password
      * @param string $password
      * @param strin $confirm_password
@@ -270,6 +328,8 @@ class User extends MY_Controller {
     }
 
     /**
+=======
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
      * Create user
      */
     function create() {
@@ -295,6 +355,7 @@ class User extends MY_Controller {
         redirect(base_url('user/user_list'));
     }
 
+<<<<<<< HEAD
     function delete($id) {
         
     }
@@ -378,6 +439,29 @@ class User extends MY_Controller {
         ));
 
         echo json_encode($users);
+=======
+    function delete() {
+        
+    }
+
+    function update() {
+        
+    }
+
+    /**
+     * Calendate json
+     */
+    function calendar_json() {
+        $this->load->helper('file');
+        $this->db->select('event_date AS date, event_name AS title, event_location AS Location, event_desc AS description');
+        $this->db->select('DATE_FORMAT(event_date, "%d %b %Y") AS event_start_date, TIME_FORMAT(event_date, "%h:%i %p") AS event_start_time');
+        $this->db->from('event_manager');
+        $query = $this->db->get();
+        $file = FCPATH . 'event.humanDate.json.php';
+        $result = json_encode($query->result());
+
+        write_file($file, $result);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
 
 }

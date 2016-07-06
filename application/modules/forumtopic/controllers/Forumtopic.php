@@ -49,7 +49,11 @@ class Forumtopic extends MY_Controller {
             $data['forum_topic_status'] = $this->input->post('topic_status');
             $data['forum_topic_desc'] = $this->input->post('description');
             $data['user_role'] = $this->session->userdata('role_name');
+<<<<<<< HEAD
             $data['user_role_id'] = $this->session->userdata('role_id');
+=======
+            $data['user_role_id'] = $this->session->userdata('user_id');
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             $data['forum_id'] = $this->input->post('forum_id');
 
             $this->Forum_topics_model->insert($data);
@@ -98,7 +102,11 @@ class Forumtopic extends MY_Controller {
             $data['forum_topic_desc'] = $this->input->post('description');
             if ($topic->user_role == $this->session->userdata('role_name')) {
                 $data['user_role'] = $this->session->userdata('role_name');
+<<<<<<< HEAD
                 $data['user_role_id'] = $this->session->userdata('role_id');
+=======
+                $data['user_role_id'] = $this->session->userdata('user_id');
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 
             }
             $this->Forum_topics_model->update($id, $data);

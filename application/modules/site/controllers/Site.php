@@ -542,6 +542,7 @@ class Site extends MY_Controller {
         if ($param == "create") {
             $data['forum_topic_id'] = $this->input->post('forum_topic_id');
             $data['forum_comments'] = $this->input->post('discussion');
+<<<<<<< HEAD
             $data['forum_comment_status'] = '1';
             $data['user_role'] = $this->session->userdata('login_type');
             $data['user_role_id'] = $this->session->userdata('login_user_id');
@@ -557,15 +558,85 @@ class Site extends MY_Controller {
             $data['forum_topic_title'] = $this->input->post('subject');
             $data['forum_topic_desc'] = $this->input->post('discussion');
             if ($this->session->userdata('login_type') == "admin") {
+=======
+            if ($_FILES['topicfile']['name'] != "") {
+             if (!is_dir(FCPATH . 'uploads/forum_file')) {
+                        $path = FCPATH . 'uploads/forum_file';
+                        mkdir($path, 0777);
+                    }
+            
+             $config['upload_path'] = 'uploads/forum_file';
+                    $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf|xlsx|xls|doc|docx|ppt|pptx|txt';
+                    $this->load->library('upload', $config);
+                    $this->upload->initialize($config);
+                    //$this->upload->set_allowed_types('*');	
+
+                    if (!$this->upload->do_upload('topicfile')) {
+                        $this->session->set_flashdata('message', "Invalid File!");
+                      redirect(base_url('site/viewtopic/' . $data['forum_topic_id']));
+                    } else {
+                        $file = $this->upload->data();
+
+                        $data['topic_file'] = $file['file_name'];
+                       
+                    }
+             }
+            
+            $data['forum_comment_status'] = '1';
+            $data['user_role'] = $this->session->userdata('role_name');
+            $data['user_role_id'] = $this->session->userdata('user_id');
+            $this->Site_model->create_comment($data);
+            $this->session->set_flashdata('message', ' Your comment has been added successfully.');
+                redirect(base_url('site/viewtopic/' . $data['forum_topic_id']));
+        }
+    }
+
+     function crudtopic($param = '') {
+        if ($param = 'create') {
+            $data['forum_id'] = $this->input->post('forum_id');
+            $data['forum_topic_title'] = $this->input->post('subject');
+             if ($_FILES['topicfile']['name'] != "") {
+             if (!is_dir(FCPATH . 'uploads/forum_file')) {
+                        $path = FCPATH . 'uploads/forum_file';
+                        mkdir($path, 0777);
+                    }
+            
+             $config['upload_path'] = 'uploads/forum_file';
+                    $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf|xlsx|xls|doc|docx|ppt|pptx|txt';
+                    $this->load->library('upload', $config);
+                    $this->upload->initialize($config);
+                    //$this->upload->set_allowed_types('*');	
+
+                    if (!$this->upload->do_upload('topicfile')) {
+                        $this->session->set_flashdata('message', "Invalid File!");
+                      redirect(base_url('site/topics/' . $data['forum_id']));
+                    } else {
+                        $file = $this->upload->data();
+
+                        $data['topic_file'] = $file['file_name'];
+                       
+                    }
+             }
+            $data['forum_topic_desc'] = $this->input->post('discussion');
+            if ($this->session->userdata('role_name') == "Admin") {
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 $data['forum_topic_status'] = '1';
             } else {
                 $data['forum_topic_status'] = '0';
             }
+<<<<<<< HEAD
             $data['user_role'] = $this->session->userdata('login_type');
             $data['user_role_id'] = $this->session->userdata('login_user_id');
 
             $this->Site_model->create_topic($data);
             if ($this->session->userdata('login_type') == "admin") {
+=======
+            $data['user_role'] = $this->session->userdata('role_name');
+            $data['user_role_id'] = $this->session->userdata('user_id');
+
+            $this->Site_model->create_topic($data);
+            if ($this->session->userdata('role_name') == "Admin") {
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 $this->session->set_flashdata('message', 'Your Topic Added Successfully');
             } else {
                 $this->session->set_flashdata('message', ' Your Topic has been queued for review by site administrators and will be published after approval.');
@@ -581,8 +652,13 @@ class Site extends MY_Controller {
      * @param int $topic id   
      */
     function delete_comment($id = '', $topic_id = '') {
+<<<<<<< HEAD
         $user_role = $this->session->userdata("login_type");
         $user_id = $this->session->userdata("login_user_id");
+=======
+        $user_role = $this->session->userdata("role_name");
+        $user_id = $this->session->userdata("user_id");
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         $comment_id = $id;
         $res = $this->Site_model->get_user_comment_delete_permission($user_role, $user_id, $comment_id);
         if (!empty($res)) {

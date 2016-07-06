@@ -27,9 +27,15 @@
                                         <th >Assignment-File</th>
                                         <th >Submitted-File</th>
                                         <th >Department</th>
+<<<<<<< HEAD
                                         <th >Branch</th>												
                                         <th >Batch</th>												
                                         <th >Semester</th>
+=======
+                                        <th >Branch</th>											                                        
+                                        <th >Semester</th>
+                                        <th>Subject</th>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                         <th>Professor Name</th>
                                         <th >Instruction</th>
                                         <th >Feedback</th>                                                
@@ -67,6 +73,7 @@
                                                 }
                                                 ?>
                                             </td>
+<<<<<<< HEAD
                                             <td >
                                                 <?php
                                                 foreach ($batch as $bch) {
@@ -76,6 +83,9 @@
                                                 }
                                                 ?>
                                             </td>
+=======
+                                             
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                             <td >
                                                 <?php
                                                 foreach ($semester as $sem) {
@@ -85,7 +95,13 @@
                                                 }
                                                 ?>													
                                             </td>
+<<<<<<< HEAD
                                             <td><?php echo roleuserdatatopic($row['user_role'],$row['user_role_id']); ?></td>
+=======
+                                            <td><?php   echo $row['subject_name'];
+                                                    ?></td>
+                                            <td><?php echo roleuserdatatopic($row['user_role'],$row['user_id']); ?></td>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                             <td ><?php echo $row['assignment_instruction']; ?></td>	
                                             <td ><?php echo wordwrap($row['feedback'], 30, "<br>\n"); ?></td>
                                             <td ><?php echo $row['grade']; ?></td>
@@ -112,12 +128,16 @@
                                             <option value="">Select</option>
                                         </select>
                                     </div>
+<<<<<<< HEAD
                                     <div class="form-group col-sm-2">
                                         <label><?php echo ucwords("Batch"); ?></label>
                                         <select id="submit-batch" name="batch_search" data-filter="5" class="form-control">
                                             <option value="">Select</option>
                                         </select>
                                     </div>                                
+=======
+                                                                   
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                     <div class="form-group col-sm-2">
                                         <label> <?php echo ucwords("Semester"); ?></label>
                                         <select id="submit-semester" name="semester_search" data-filter="6" class="form-control">
@@ -125,6 +145,15 @@
 
                                         </select>
                                     </div>
+<<<<<<< HEAD
+=======
+                                    <div class="form-group col-sm-2">
+                                        <label><?php echo ucwords("Subject"); ?></label>
+                                        <select id="submit-subject" name="subject_search" data-filter="5" class="form-control">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div> 
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                     <div class="form-group col-sm-1" style="display: none;">
                                         <label><?php echo ucwords("Class"); ?><span style="color:red"></span></label>
                                         <select class="form-control filter-rows" name="divclass" id="sfilterclass" >
@@ -153,9 +182,14 @@
                                             <th ><?php echo ucwords("Assignment"); ?></th>
                                             <th ><?php echo ucwords("Student"); ?></th>
                                             <th ><?php echo ucwords("Department"); ?></th>
+<<<<<<< HEAD
                                             <th ><?php echo ucwords("Branch"); ?></th>												
                                             <th ><?php echo ucwords("Batch"); ?></th>												
                                             <th ><?php echo ucwords("Sem"); ?></th>	
+=======
+                                            <th ><?php echo ucwords("Branch"); ?></th>												                                         
+                                            <th ><?php echo ucwords("Semester"); ?></th>	
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                             <th ><?php echo ucwords("Submission date"); ?></th>	
                                             <th ><?php echo ucwords("Submitted-date"); ?></th>	
                                             <th ><?php echo ucwords("Comment"); ?></th>
@@ -193,6 +227,7 @@
                                                 </td>
                                                 <td >
                                                     <?php
+<<<<<<< HEAD
                                                     foreach ($batch as $bch) {
                                                         if ($bch->b_id == $rowsub->assign_batch) {
                                                             echo $bch->b_name;
@@ -202,6 +237,8 @@
                                                 </td>
                                                 <td >
                                                     <?php
+=======
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                     foreach ($semester as $sem) {
                                                         if ($sem->s_id == $rowsub->assign_sem) {
                                                             echo $sem->s_name;
@@ -250,7 +287,33 @@
             batch_form_department_branch(department, branch_id);
             semester_from_branch(branch_id);
         });
+<<<<<<< HEAD
         
+=======
+        $('#submit-semester').on('change', function () {
+            var sem =  $(this).val();
+            var branch_id = $('#submit-branch').val();
+            var department = $('#submit-course').val();
+           subject_get_submitted(department,branch_id,sem);
+        });
+        
+        function subject_get_submitted(department,branch_id,sem)
+        {
+             $('#submit-subject').find('option').remove().end();
+            $('#submit-subject').append('<option value>Select</option>');
+            $.ajax({
+                url: '<?php echo base_url(); ?>subject/subject_department_branch_sem/' + department + '/' + branch_id + '/'+sem,
+                type: 'GET',
+                success: function (content) {
+                    var subject = jQuery.parseJSON(content);
+                    console.log(subject);
+                    $.each(subject, function (key, value) {
+                        $('#submit-subject').append('<option value=' + value.sm_id + '>' + value.subject_name + '</option>');
+                    });
+                }
+            });
+        }
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         function department_branch(department_id) {
             $('#submit-branch').find('option').remove().end();
             $('#submit-branch').append('<option value>Select</option>');
@@ -319,14 +382,22 @@
 
                     var degree = $("#submit-course").val();
                     var course = $("#submit-branch").val();
+<<<<<<< HEAD
                     var batch = $("#submit-batch").val();
+=======
+                    var subject = $("#submit-subject").val();
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                     var semester = $("#submit-semester").val();
                     var divclass = $("#submit-class").val();
                   
                     $.ajax({
                         url: '<?php echo base_url(); ?>assignment/getassignment/assessments',
                         type: 'post',
+<<<<<<< HEAD
                         data: {'degree': degree, "course": course, "batch": batch, "semester": semester},
+=======
+                        data: {'degree': degree, "course": course, "subject": subject, "semester": semester},
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                         success: function (content) {                        
                             $("#getsubmit").html(content);
                             // $("#dtbl").hide();

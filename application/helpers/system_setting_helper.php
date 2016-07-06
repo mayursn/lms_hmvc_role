@@ -47,8 +47,13 @@ if (!function_exists('user_activity')) {
     function user_activity()
     {
          $CI = & get_instance();
+<<<<<<< HEAD
          $user_id = $CI->session->userdata('login_user_id');
          $user_role = $CI->session->userdata('login_type');
+=======
+         $user_id = $CI->session->userdata('role_id');
+         $user_role = $CI->session->userdata('role_name');
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
          $activity_status = $CI->session->userdata('activity_status');
 
 

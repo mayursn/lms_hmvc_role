@@ -32,4 +32,14 @@ class Class_model extends MY_Model {
         return $class;
     }
     
+<<<<<<< HEAD
+=======
+    
+    public function get_class_name($class_id)
+    {
+        $this->db->where("class_id",$class_id);
+        return  $this->db->get('class')->row()->class_name;
+        
+    }
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 }

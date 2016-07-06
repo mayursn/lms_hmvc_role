@@ -43,5 +43,10 @@ class User_model extends MY_Model {
                             'Student', 'Professor'
                         ])->get()->result();
     }
+<<<<<<< HEAD
+=======
+    
+    
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
 }

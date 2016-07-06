@@ -143,6 +143,10 @@ $delete = delete_permission($permission, 'Library');
 
                                 </td>	
                                 <td id="downloadedfile"><a href="<?php echo $row->lm_url; ?>" download="" target="_blank" title="download"><i class="fa fa-download"></i></a></td>	
+<<<<<<< HEAD
+=======
+                                <?php if($update || $delete){ ?>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                 <td class="menu-action">
                                     <?php if ($update) { ?>
                                     <a href="#" onclick="showAjaxModal('<?php echo base_url(); ?>modal/popup/digital_edit/<?php echo $row->lm_id; ?>');"  data-toggle="tooltip" data-placement="top" ><span class="label label-primary mr6 mb6"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</span></a>
@@ -151,6 +155,10 @@ $delete = delete_permission($permission, 'Library');
                                     <a href="#" onclick="confirm_modal('<?php echo base_url(); ?>digital/delete/<?php echo $row->lm_id; ?>');"  data-toggle="tooltip" data-placement="top"><span class="label label-danger mr6 mb6"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</span></a>
                                     <?php } ?>
                                 </td>
+<<<<<<< HEAD
+=======
+                                <?php } ?>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                             </tr>
                         <?php endforeach; ?>						
                     </tbody>
@@ -188,7 +196,11 @@ $delete = delete_permission($permission, 'Library');
             });
              return false;
          });
+<<<<<<< HEAD
          $("#courses").change(function(){
+=======
+        $("#courses").change(function(){
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 var degree = $(this).val();
                 
                 var dataString = "degree="+degree;
@@ -196,6 +208,7 @@ $delete = delete_permission($permission, 'Library');
                     type:"POST",
                     url:"<?php echo base_url().'digital/get_cource_all/'; ?>",
                     data:dataString,                   
+<<<<<<< HEAD
                     success:function(response){
                         if(degree=='All')
                         {
@@ -207,6 +220,27 @@ $delete = delete_permission($permission, 'Library');
                         }
                         else{
                             $("#branches").html(response);
+=======
+                    success:function(response){ 
+                        $('#branches').find('option').remove().end();
+                        $('#branches').append('<option value>Select</option>');
+                         $('#branches').append('<option value="All">All</option>');
+                        if(degree=='All')
+                        {                             
+                          //  $("#branches").html(response);
+                             $("#batches").val($("#batches option:eq(1)").val());
+                             $("#branches").val($("#branches option:eq(1)").val());
+                             $("#semesters").val($("#semesters option:eq(1)").val());
+                            
+                        }
+                        else{
+                                var branch = jQuery.parseJSON(response);                            
+                                console.log(branch);
+                                $.each(branch, function (key, value) {
+                                    $('#branches').append('<option value=' + value.course_id + '>' + value.c_name + '</option>');
+                                });
+                                              
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                         }
                     }
                 });
@@ -229,6 +263,7 @@ $delete = delete_permission($permission, 'Library');
                     url:"<?php echo base_url().'digital/get_batchs_all/'; ?>",
                     data:dataString,                   
                     success:function(response){
+<<<<<<< HEAD
                          if(course=='All')
                         {
                               $("#batches").html(response);
@@ -238,6 +273,24 @@ $delete = delete_permission($permission, 'Library');
                         }
                         else{
                            $("#batches").html(response);                            
+=======
+                          $('#batches').find('option').remove().end();
+                        $('#batches').append('<option value>Select</option>');
+                         $('#batches').append('<option value="All">All</option>');
+                         if(course=='All')
+                        {                           
+                             //$("#batches").html(response);
+                             $("#batches").val($("#batches option:eq(1)").val());                            
+                             $("#semesters").val($("#semesters option:eq(1)").val());
+                           
+                        }
+                        else{
+                          var batch = jQuery.parseJSON(response);                            
+                                console.log(batch);
+                                $.each(batch, function (key, value) {
+                                    $('#batches').append('<option value=' + value.b_id + '>' + value.b_name + '</option>');
+                                });                      
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                         }
                         
                     }

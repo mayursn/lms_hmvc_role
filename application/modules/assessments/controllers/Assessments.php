@@ -18,9 +18,17 @@ class Assessments extends MY_Controller {
         $this->load->model('semester/Semester_model');
         $this->load->model('classes/Class_model');
         $this->load->model('assignment/Assignment_submission_model');
+<<<<<<< HEAD
     }
 
     function index() {
+=======
+        $this->load->model('academic_year/Academic_year_model');
+    }
+
+    function index() {
+        
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         $this->data['title'] = 'Assessment';
         $this->data['page'] = 'assessment';
         $this->data['assignment'] = $this->Assignment_manager_model->order_by_column('assign_dos');
@@ -30,7 +38,14 @@ class Assessments extends MY_Controller {
         $this->data['batch'] = $this->Batch_model->order_by_column('b_name');
         $this->data['degree'] = $this->Degree_model->order_by_column('d_name');       
         $this->data['page'] = 'assignment';
+<<<<<<< HEAD
         $this->data['assessment'] = $this->Assignment_submission_model->get_assessments();
+=======
+        $current = $this->Academic_year_model->get_many_by(array('current_year_status'=>'active'));
+        $start_year = $current[0]->start_year;
+        $end_year  = $current[0]->end_year;
+        $this->data['assessment'] = $this->Assignment_submission_model->get_assessments($start_year,$end_year);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         $this->__template('assessments/index', $this->data);
     }
     

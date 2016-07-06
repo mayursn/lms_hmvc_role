@@ -33,7 +33,12 @@ $row = $this->participate_manager_model->get($param2);
                                         }
                                         ?>>All</option>
                                                 <?php
+<<<<<<< HEAD
                                                 $datadegree = $this->db->get_where('degree', array('d_status' => 1))->result();
+=======
+                                                $this->load->model('department/Degree_model');
+                                                $datadegree =$this->Degree_model->get_many_by(array('d_status' => 1));                                                
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 foreach ($datadegree as $rowdegree) {
                                                     if ($rowdegree->d_id == $row->pp_degree) {
                                                         ?>
@@ -61,7 +66,12 @@ $row = $this->participate_manager_model->get($param2);
                                         }
                                         ?>>All</option>
                                                 <?php
+<<<<<<< HEAD
                                                 $course = $this->db->get_where('course', array('course_status' => 1))->result();
+=======
+                                                $this->load->model("branch/Course_model");
+                                                $course = $this->Course_model->get_many_by(array('course_status' => 1));                                                
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 foreach ($course as $crs) {
                                                     if ($crs->course_id == $row->pp_course) {
                                                         ?>
@@ -90,7 +100,13 @@ $row = $this->participate_manager_model->get($param2);
                                         }
                                         ?>>All</option>
                                                 <?php
+<<<<<<< HEAD
                                                 $databatch = $this->db->get_where('batch', array('b_status' => 1))->result();
+=======
+                                                $this->load->model('batch/Batch_model');
+                                                $databatch =$this->Batch_model->get_many_by(array('b_status' => 1));
+                                                // $this->db->get_where('batch', )->result();
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 foreach ($databatch as $row1) {
                                                     if ($row1->b_id == $row->pp_batch) {
                                                         ?>
@@ -117,7 +133,12 @@ $row = $this->participate_manager_model->get($param2);
                                         }
                                         ?>>All</option>   
                                                 <?php
+<<<<<<< HEAD
                                                 $datasem = $this->db->get_where('semester', array('s_status' => 1))->result();
+=======
+                                                $this->load->model('semester/Semester_model');
+                                                $datasem = $this->Semester_model->get_many_by(array('s_status' => 1));
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 foreach ($datasem as $rowsem) {
                                                     if ($rowsem->s_id == $row->pp_semester) {
                                                         ?>
@@ -175,6 +196,7 @@ $row = $this->participate_manager_model->get($param2);
             url: "<?php echo base_url() . 'participate/get_cource/'; ?>",
             data: dataString,
             success: function (response) {
+<<<<<<< HEAD
                 if (degree == "All")
                 {
 
@@ -184,6 +206,22 @@ $row = $this->participate_manager_model->get($param2);
 
                 } else {
                     $("#course2").html(response);
+=======
+                  $('#course2').find('option').remove().end();
+                $('#course2').append('<option value>Select</option>');
+                $('#course2').append('<option value="All">All</option>');
+                if (degree == "All")
+                {
+                    $("#batch2").val($("#batch2 option:eq(1)").val());
+                    $("#course2").val($("#course2 option:eq(1)").val());
+                    $("#semester2").val($("#semester2 option:eq(1)").val());
+                } else {
+                    var branch = jQuery.parseJSON(response);
+                    console.log(branch);
+                    $.each(branch, function (key, value) {
+                        $('#course2').append('<option value=' + value.course_id + '>' + value.c_name + '</option>');
+                    });
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 }
 
             }
@@ -196,16 +234,72 @@ $row = $this->participate_manager_model->get($param2);
         var dataString = "course=" + course + "&degree=" + degree;
         $.ajax({
             type: "POST",
+<<<<<<< HEAD
             url: "<?php echo base_url() . 'participate/get_batchs/'; ?>",
             data: dataString,
             success: function (response) {
                 $("#semester2").val($("#semester2 option:eq(1)").val());
                 $("#batch2").html(response);
+=======
+            url: "<?php echo base_url() . 'digital/get_batchs/'; ?>",
+            data: dataString,
+            success: function (response) {
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url() . 'digital/get_semesterall/'; ?>",
+                    data: {'course': course},
+                    success: function (response1) {
+                        $('#semester2').find('option').remove().end();
+                        $('#semester2').append('<option value>Select</option>');
+                        $('#semester2').append('<option value="All">All</option>');
+                        if(course=="All")
+                        {
+                            $("#semester2").val($("#semester2 option:eq(1)").val());
+                        }
+                        else{
+                            var sem_value = jQuery.parseJSON(response1);
+                            console.log(sem_value);
+                            $.each(sem_value, function (key, value) {
+                                $('#semester2').append('<option value=' + value.s_id + '>' + value.s_name + '</option>');
+                            });
+                        }
+                         
+                        
+                        
+                    }
+                });
+                $('#batch2').find('option').remove().end();
+                $('#batch2').append('<option value>Select</option>');
+                $('#batch2').append('<option value="All">All</option>');
+                //$("#semester").val($("#semester option:eq(1)").val());
+               if (course == "All")
+                {
+                    $("#batch2").val($("#batch2 option:eq(1)").val());
+                    $("#semester2").val($("#semester2 option:eq(1)").val());
+                } else {
+
+                    var batch_value = jQuery.parseJSON(response);
+                    console.log(batch_value);
+                    $.each(batch_value, function (key, value) {
+                        $('#batch2').append('<option value=' + value.b_id + '>' + value.b_name + '</option>');
+                    });
+                }
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             }
         });
     });
 
+<<<<<<< HEAD
 
+=======
+$("#batch2").change(function () {
+        var batches = $("#batch2").val();
+        if (batches == 'All')
+        {
+            $("#semester2").val($("#semester2 option:eq(1)").val());
+        }
+    });
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     function get_student(batch, semester = '') {
         $.ajax({
             url: '<?php echo base_url(); ?>admin/batchwisestudent/',

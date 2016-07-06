@@ -13,17 +13,37 @@ class MY_Controller extends MX_Controller {
      */
     function __construct() {
         parent::__construct();
+<<<<<<< HEAD
         header('Access-Control-Allow-Origin: *');        
+=======
+        header('Access-Control-Allow-Origin: *');
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         $this->load->language('lms');
         $this->data['currency'] = system_info('currency');
 
         if ($this->is_user_logged_in()) {
             $this->login_user_role_permission();
+<<<<<<< HEAD
             if (!count($this->data['permission'])) {
+=======
+            //$this->data['permission'] = array();
+            if(!count($this->data['permission'])) {
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 echo '<h3>You don\'t have permission to access any module. Pleace contact admin</h3>';
                 exit;
             }
         }
+<<<<<<< HEAD
+=======
+        if($this->session->userdata('std_id'))
+        {
+         $notification = show_notification($this->session->userdata('std_id'));                            
+         $this->session->set_userdata('notifications', $notification);
+        }
+        if ($this->session->userdata('last_activity')) {
+            user_activity();
+        }
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
 
     /**
@@ -96,13 +116,18 @@ class MY_Controller extends MX_Controller {
         $user_role_module = $this->Module_role_permission_model
                 ->role_permission_with_module($login_user_details['role_id']);
 
+<<<<<<< HEAD
         foreach ($user_role_module as $row) {
+=======
+        foreach($user_role_module as $row) {
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             $module = str_replace(' ', '_', $row->module_name);
             $this->data['permission'][$module] = array();
             array_push($this->data['permission'][$module], str_split($row->user_permission));
         }
     }
 
+<<<<<<< HEAD
     /**
      * Email configuration and load library
      */
@@ -120,4 +145,6 @@ class MY_Controller extends MX_Controller {
         return $config;
     }
 
+=======
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 }

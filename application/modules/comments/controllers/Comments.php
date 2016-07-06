@@ -65,7 +65,11 @@ class Comments extends MY_Controller {
             $data['forum_comments'] = $this->input->post('comment');
             $data['forum_comment_status'] = '1';
             $data['user_role'] = $this->session->userdata('role_name');
+<<<<<<< HEAD
             $data['user_role_id'] = $this->session->userdata('role_id');
+=======
+            $data['user_role_id'] = $this->session->userdata('user_id');
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
            
             $this->Forum_comment_model->insert($data);
             $this->flash_notification('Forum comment is successfully added.');
@@ -114,7 +118,11 @@ class Comments extends MY_Controller {
             $data['forum_comments'] = $this->input->post('comment');
             $data['forum_comment_status'] = $this->input->post('comment_status');
             $data['user_role'] = $this->session->userdata('role_name');
+<<<<<<< HEAD
             $data['user_role_id'] = $this->session->userdata('role_id');
+=======
+            $data['user_role_id'] = $this->session->userdata('user_id');
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         
             $this->Forum_comment_model->update($id, $data);
             $this->flash_notification('Forum Comment is successfully updated.');

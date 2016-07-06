@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+=======
+<!-- Start .row -->
+<?php
+$create = create_permission($permission, 'Syllabus');
+$read = read_permission($permission, 'Syllabus');
+$update = update_permisssion($permission, 'Syllabus');
+$delete = delete_permission($permission, 'Syllabus');
+?>
+<?php if($create || $read || $update || $delete){ ?>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
 
 <table class="table table-striped table-bordered table-responsive" cellspacing=0 width=100% id="datatable-list">
@@ -9,8 +20,15 @@
             <th><div><?php echo ucwords("Branch"); ?></div></th>												                                                
             <th><div><?php echo ucwords("Semester"); ?></div></th>
             <th><div><?php echo ucwords("Description"); ?></div></th>
+<<<<<<< HEAD
             <th><div><?php echo ucwords("File"); ?></div></th>                                            
             <th><div><?php echo ucwords("Action"); ?></div></th>
+=======
+            <th><div><?php echo ucwords("File"); ?></div></th>         
+            <?php if($update || $delete){ ?>
+            <th><div><?php echo ucwords("Action"); ?></div></th>
+            <?php } ?>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         </tr>
     </thead>
     <tbody>
@@ -53,15 +71,32 @@
                 </td>	
                 <td><?php echo wordwrap($row->syllabus_desc, 30, "<br>\n"); ?></td>
                 <td id="downloadedfile"><a href="<?php echo base_url() . 'uploads/syllabus/' . $row->syllabus_filename; ?>" download="" title="<?php echo $row->syllabus_title; ?>"><i class="fa fa-download"></i></a></td>	                                                  
+<<<<<<< HEAD
                 <td class="menu-action">
                     <a href="#" onclick="showAjaxModal('<?php echo base_url(); ?>modal/popup/syllabus_edit/<?php echo $row->syllabus_id; ?>');"  data-toggle="tooltip" data-placement="top" ><span class="label label-primary mr6 mb6"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</span></a>
 
                     <a href="#" onclick="confirm_modal('<?php echo base_url(); ?>syllabus/delete/<?php echo $row->syllabus_id; ?>');"  data-toggle="tooltip" data-placement="top"><span class="label label-danger mr6 mb6"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</span></a>	
                 </td>	
+=======
+                <?php if($update || $delete){ ?>
+                <td class="menu-action">
+                    <?php if($update){ ?>
+                    <a href="#" onclick="showAjaxModal('<?php echo base_url(); ?>modal/popup/syllabus_edit/<?php echo $row->syllabus_id; ?>');"  data-toggle="tooltip" data-placement="top" ><span class="label label-primary mr6 mb6"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</span></a>
+                    <?php } ?>
+                    <?php if($delete){ ?>
+                    <a href="#" onclick="confirm_modal('<?php echo base_url(); ?>syllabus/delete/<?php echo $row->syllabus_id; ?>');"  data-toggle="tooltip" data-placement="top"><span class="label label-danger mr6 mb6"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</span></a>	
+                    <?php } ?>
+                </td>	
+                <?php } ?>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             </tr>
         <?php endforeach; ?>						
     </tbody>
 </table>
+<<<<<<< HEAD
+=======
+<?php } ?>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 <script type="text/javascript">
     $(document).ready(function () {
         "use strict";

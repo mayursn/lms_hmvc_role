@@ -53,6 +53,10 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
+<<<<<<< HEAD
+=======
+ini_set('max_execution_time', 0);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
 /*

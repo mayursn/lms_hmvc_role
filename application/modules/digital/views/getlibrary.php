@@ -1,4 +1,15 @@
+<<<<<<< HEAD
 
+=======
+<!-- Start .row -->
+<?php
+$create = create_permission($permission, 'Library');
+$read = read_permission($permission, 'Library');
+$update = update_permisssion($permission, 'Library');
+$delete = delete_permission($permission, 'Library');
+?>
+  <?php if ($create || $read || $update || $delete) { ?>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 <table class="table table-striped table-bordered table-responsive" cellspacing=0 width=100% id="data-tables">
     <thead>
         <tr>
@@ -10,7 +21,13 @@
             <th>Batch</th>												
             <th>Semester</th>												
             <th>File</th>              
+<<<<<<< HEAD
             <th>Action</th>											
+=======
+            <?php if ( $update || $delete) { ?>
+                            <th>Action</th>	
+                            <?php } ?>									
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         </tr>
     </thead>
     <tbody>
@@ -72,16 +89,33 @@
                     ?>													
                 </td>	
                 <td><a href="<?php echo base_url() . 'uploads/project_file/'.$row->lm_filename; ?>" download="" target="_blank" title="<?php echo $row->lm_filename; ?>"><i class="fa fa-download"></i></a></td>	             
+<<<<<<< HEAD
 
                 <td class="menu-action">
                     <a href="#" onclick="showAjaxModal('<?php echo base_url(); ?>modal/popup/digital_edit/<?php echo $row->lm_id; ?>');"  data-toggle="tooltip" data-placement="top" ><span class="label label-primary mr6 mb6"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</span></a>
 
                     <a href="#" onclick="confirm_modal('<?php echo base_url(); ?>digital/delete/<?php echo $row->lm_id; ?>');" title="Remove" data-toggle="tooltip" data-placement="top" ><span class="label label-danger mr6 mb6"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</span></a>	
                 </td>	
+=======
+<?php if($update || $delete){ ?>
+                <td class="menu-action">
+                    <?php if($update){ ?>
+                    <a href="#" onclick="showAjaxModal('<?php echo base_url(); ?>modal/popup/digital_edit/<?php echo $row->lm_id; ?>');"  data-toggle="tooltip" data-placement="top" ><span class="label label-primary mr6 mb6"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</span></a>
+                    <?php } ?>
+                    <?php if($delete){ ?>
+                    <a href="#" onclick="confirm_modal('<?php echo base_url(); ?>digital/delete/<?php echo $row->lm_id; ?>');" title="Remove" data-toggle="tooltip" data-placement="top" ><span class="label label-danger mr6 mb6"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</span></a>	
+                    <?php } ?>
+                </td>	
+<?php } ?>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             </tr>
         <?php endforeach; ?>						
     </tbody>
 </table>
+<<<<<<< HEAD
+=======
+  <?php } ?>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 <script type="text/javascript">
     $(document).ready(function () {
         "use strict";

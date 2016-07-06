@@ -1,6 +1,14 @@
 <?php
+<<<<<<< HEAD
 $edit_data = $this->db->get_where('project_manager', array('pm_id' => $param2))->result_array();
 foreach ($edit_data as $row):
+=======
+
+$this->load->model('project/Project_manager_model');
+$this->load->model('student/Student_model');
+$row = $this->Project_manager_model->get($param2);
+
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     ?>
 
     <div class=row>
@@ -17,11 +25,19 @@ foreach ($edit_data as $row):
                             <div class="">
                                 <span style="color:red">* <?php echo "is " . ucwords("mandatory field"); ?></span> 
                             </div>  
+<<<<<<< HEAD
                             <?php echo form_open(base_url() . 'project/update/' . $row['pm_id'], array('class' => 'form-horizontal form-groups-bordered validate', 'id' => 'frmeditproject', 'target' => '_top', 'enctype' => 'multipart/form-data')); ?>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label"><?php echo ucwords("Project Title"); ?><span style="color:red">*</span></label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="title" id="title2"  value="<?php echo $row['pm_title']; ?>"/>
+=======
+                            <?php echo form_open(base_url() . 'project/update/' . $row->pm_id, array('class' => 'form-horizontal form-groups-bordered validate', 'id' => 'frmeditproject', 'target' => '_top', 'enctype' => 'multipart/form-data')); ?>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label"><?php echo ucwords("Project Title"); ?><span style="color:red">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="title" id="title2"  value="<?php echo $row->pm_title; ?>"/>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                 </div>
                                 <lable class="error" id="error_lable_exist" style="color:#f85d2c"></lable>
                             </div>
@@ -31,10 +47,17 @@ foreach ($edit_data as $row):
                                     <select name="degree" id="degree2" class="form-control">
                                         <option value="">Select department</option>
                                         <?php
+<<<<<<< HEAD
                                         $this->db->order_by("d_name","ASC");
                                         $datadegree = $this->db->get_where('degree', array('d_status' => 1))->result();
                                         foreach ($datadegree as $rowdegree) {
                                             if ($rowdegree->d_id == $row['pm_degree']) {
+=======
+                                        $this->load->model('department/Degree_model');
+                                        $datadegree = $this->Degree_model->order_by_column('d_name');
+                                        foreach ($datadegree as $rowdegree) {
+                                            if ($rowdegree->d_id == $row->pm_degree) {
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 ?>
                                                 <option value="<?= $rowdegree->d_id ?>" selected><?= $rowdegree->d_name ?></option>
                                                 <?php
@@ -55,9 +78,16 @@ foreach ($edit_data as $row):
                                     <select name="course" id="course2" class="form-control">
                                         <option value="">Select Branch</option>
                                         <?php
+<<<<<<< HEAD
                                         $course = $this->db->get_where('course', array('course_status' => 1, 'degree_id' => $row['pm_degree']))->result();
                                         foreach ($course as $crs) {
                                             if ($crs->course_id == $row['pm_course']) {
+=======
+                                        $this->load->model('branch/Course_model');
+                                        $course  = $this->Course_model->get_many_by( array('course_status' => 1, 'degree_id' => $row->pm_degree));                                        
+                                        foreach ($course as $crs) {
+                                            if ($crs->course_id == $row->pm_course) {
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 ?>
                                                 <option value="<?= $crs->course_id ?>" selected><?= $crs->c_name ?></option>
                                                 <?php
@@ -78,9 +108,19 @@ foreach ($edit_data as $row):
                                     <select name="batch"  id="batch2" onchange="get_student(this.value);" class="form-control">
                                         <option value="">Select batch</option>
                                         <?php
+<<<<<<< HEAD
                                         $databatch = $this->db->query("SELECT * FROM batch WHERE b_status=1 AND FIND_IN_SET('" . $row['pm_degree'] . "',degree_id) AND FIND_IN_SET('" . $row['pm_course'] . "',course_id)")->result();
                                         foreach ($databatch as $row1) {
                                             if ($row1->b_id == $row['pm_batch']) {
+=======
+                                        $pm_degree = $row->pm_degree;
+                                        $pm_course = $row->pm_course;
+                                        $this->load->model('batch/Batch_model');
+                                        $databatch = $this->Batch_model->department_branch_batch($pm_degree,$pm_course);
+                                        //$databatch = $this->db->query("SELECT * FROM batch WHERE b_status=1 AND FIND_IN_SET('" .  . "',degree_id) AND FIND_IN_SET('" .  . "',course_id)")->result();
+                                        foreach ($databatch as $row1) {
+                                            if ($row1->b_id == $row->pm_batch) {
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 ?>
                                                 <option value="<?= $row1->b_id ?>" selected><?= $row1->b_name ?></option>
                                                 <?php
@@ -100,9 +140,17 @@ foreach ($edit_data as $row):
                                     <select name="semester"  id="semester2" class="form-control"  >
                                         <option value="">Select semester</option>
                                         <?php
+<<<<<<< HEAD
                                         $datasem = $this->db->get_where('semester', array('s_status' => 1))->result();
                                         foreach ($datasem as $rowsem) {
                                             if ($rowsem->s_id == $row['pm_semester']) {
+=======
+                                        $this->load->model('semester/Semester_model');
+                                        $datasem = $this->Semester_model->get_all();
+                                        
+                                        foreach ($datasem as $rowsem) {
+                                            if ($rowsem->s_id == $row->pm_semester) {
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 ?>
                                                 <option value="<?= $rowsem->s_id ?>" selected><?= $rowsem->s_name ?></option>
                                                 <?php
@@ -122,6 +170,7 @@ foreach ($edit_data as $row):
                                     <select name="class2" id="class2" onchange="get_students(this.value);" class="form-control">
                                         <option value="">Select class</option>
                                         <?php
+<<<<<<< HEAD
                                         $class = $this->db->get('class')->result_array();
 
                                         foreach ($class as $c) {
@@ -132,6 +181,20 @@ foreach ($edit_data as $row):
                                             } else {
                                                 ?>
                                                 <option value="<?php echo $c['class_id'] ?>"><?php echo $c['class_name'] ?></option>
+=======
+                                        $this->load->model('classes/class_model');
+                                        $class = $this->class_model->order_by_column('class_name');
+                                        
+
+                                        foreach ($class as $c) {
+                                            if ($c->class_id == $row->class_id) {
+                                                ?>
+                                                <option selected value="<?php echo $c->class_id; ?>"><?php echo $c->class_name ?></option>
+                                                <?php
+                                            } else {
+                                                ?>
+                                                <option value="<?php echo $c->class_id ?>"><?php echo $c->class_name ?></option>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 <?php
                                             }
                                         }
@@ -147,12 +210,23 @@ foreach ($edit_data as $row):
                                     <input type="checkbox" name="checkall" id="checkAll2"  >Check All<br>
                                     <div id="student2">
                                         <?php
+<<<<<<< HEAD
                                         $stu = explode(',', $row['pm_student_id']);
 
                                         $datastudent = $this->db->get_where('student', array('std_degree' => $row['pm_degree'],
                                                     'course_id' => $row['pm_course'],
                                                     'std_batch' => $row['pm_batch'],
                                                     'semester_id' => $row['pm_semester'], 'class_id' => $row['class_id']))->result();
+=======
+                                        $stu = explode(',', $row->pm_student_id);
+
+                                        $datastudent = $this->Student_model->get_many_by( array(
+                                                    'std_degree' => $row->pm_degree,
+                                                    'course_id' => $row->pm_course,
+                                                    'std_batch' => $row->pm_batch,
+                                                    'semester_id' => $row->pm_semester,
+                                                    'class_id' => $row->class_id));
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
                                         foreach ($datastudent as $rowstu) {
                                             if (in_array($rowstu->std_id, $stu)) {
@@ -172,19 +246,31 @@ foreach ($edit_data as $row):
                             <div class="form-group">
                                 <label class="col-sm-4 control-label"><?php echo ucwords("Date of Submission"); ?><span style="color:red">*</span></label>
                                 <div class="col-sm-8">
+<<<<<<< HEAD
                                     <input type="text" readonly="" class="form-control" name="dateofsubmission1" id="dateofsubmission1" value="<?php echo date_formats($row['pm_dos']); ?>"/>
+=======
+                                    <input type="text" readonly="" class="form-control" name="dateofsubmission1" id="dateofsubmission1" value="<?php echo date_formats($row->pm_dos); ?>"/>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                 </div>
                             </div>
                           <div class="form-group">
                                 <label class="col-sm-4 control-label"><?php echo ucwords("Description"); ?></label>
                                 <div class="col-sm-8">
+<<<<<<< HEAD
                                     <textarea class="form-control" name="description" id="description" ><?php echo $row['pm_desc']; ?></textarea>
+=======
+                                    <textarea class="form-control" name="description" id="description" ><?php echo $row->pm_desc; ?></textarea>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label"><?php echo ucwords("File Upload"); ?></label>
                                 <div class="col-sm-8">
+<<<<<<< HEAD
                                     <input type="hidden" name="txtoldfile" id="txtoldfile" value="<?php echo $row['pm_filename']; ?>" />
+=======
+                                    <input type="hidden" name="txtoldfile" id="txtoldfile" value="<?php echo $row->pm_filename; ?>" />
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                     <input type="file" class="form-control" multiple="" name="projectfile[]" id="projectfile" />
                                 </div>
                             </div>
@@ -199,9 +285,12 @@ foreach ($edit_data as $row):
         </div>
     </div>
 
+<<<<<<< HEAD
     <?php
 endforeach;
 ?>
+=======
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 <script type="text/javascript">
 
     $("#btnupd").click(function (event) {

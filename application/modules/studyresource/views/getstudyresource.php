@@ -1,15 +1,36 @@
+<<<<<<< HEAD
 
+=======
+<!-- Start .row -->
+<?php
+$create = create_permission($permission, 'Study_Resource');
+$read = read_permission($permission, 'Study_Resource');
+$update = update_permisssion($permission, 'Study_Resource');
+$delete = delete_permission($permission, 'Study_Resource');
+?>
+<?php if($create || $read || $update || $delete){ ?>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 <table class="table table-striped table-bordered table-responsive" cellspacing=0 width=100% id="data-tables">
     <thead>
         <tr>
             <th>No</th>											
             <th><div>Title</div></th>											
+<<<<<<< HEAD
             <th><div>Course</div></th>
+=======
+            <th><div>Department</div></th>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             <th><div>Branch</div></th>
             <th><div>Batch</div></th>											
             <th><div>Semester</div></th>											                                                           
             <th><div>File</div></th>											
+<<<<<<< HEAD
             <th><div>Action</div></th>											
+=======
+            <?php if( $update || $delete){ ?>
+                <th>Action</th>											
+                <?php } ?>										
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         </tr>
     </thead>
     <tbody>
@@ -74,15 +95,32 @@
 
                 </td>	
              <td><a href="<?php echo base_url() . 'uploads/project_file/' . $row->study_filename; ?>" download=""  title="<?php echo $row->study_filename; ?>"><i class="fa fa-download"></i></a></td>	
+<<<<<<< HEAD
                 <td class="menu-action">
                     <a href="#" onclick="showAjaxModal('<?php echo base_url(); ?>modal/popup/studyresource_edit/<?php echo $row->study_id; ?>');"  data-toggle="tooltip" data-placement="top" ><span class="label label-primary mr6 mb6"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</span></a>
                     <a href="#" onclick="confirm_modal('<?php echo base_url(); ?>studyresource/delete/<?php echo $row->study_id; ?>');"  data-toggle="tooltip" data-placement="top" ><span class="label label-danger mr6 mb6"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</span></a>	
                 </td>	
+=======
+             <?php if($update || $delete){ ?>
+                <td class="menu-action">
+                  <?php if($update){ ?>
+                    <a href="#" onclick="showAjaxModal('<?php echo base_url(); ?>modal/popup/studyresource_edit/<?php echo $row->study_id; ?>');"  data-toggle="tooltip" data-placement="top" ><span class="label label-primary mr6 mb6"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</span></a>
+                  <?php } ?>
+                   <?php if($delete){ ?> 
+                    <a href="#" onclick="confirm_modal('<?php echo base_url(); ?>studyresource/delete/<?php echo $row->study_id; ?>');"  data-toggle="tooltip" data-placement="top" ><span class="label label-danger mr6 mb6"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</span></a>	
+                   <?php } ?>
+                </td>	
+             <?php } ?>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             </tr>
         <?php endforeach; ?>						
     </tbody>
 </table>
+<<<<<<< HEAD
 
+=======
+<?php } ?>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
 <script type="text/javascript">
     $(document).ready(function () {

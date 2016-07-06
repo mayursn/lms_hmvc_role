@@ -12,6 +12,13 @@ class Professor extends MY_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('professor/Professor_model');
+<<<<<<< HEAD
+=======
+        $this->load->model('todo/Todo_list_model');
+        $this->load->model('professor/Last_activity_model');
+        
+        
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
 
     /**
@@ -23,6 +30,18 @@ class Professor extends MY_Controller {
         $this->data['professor'] = $this->Professor_model->get_all();
         $this->__template('professor/index', $this->data);
     }
+<<<<<<< HEAD
+=======
+    
+    function dashboard()
+    {
+         $this->data['page'] = 'dashboard';
+        $this->data['title'] = 'Dashboard';
+        $this->data['todolist'] = $this->Todo_list_model->get_todo();
+        $this->data['recent_activity'] = $this->Last_activity_model->get_recent_activity();
+        $this->__template('professor/dashboard', $this->data);
+    }
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
     /**
      * Create professor
@@ -82,5 +101,83 @@ class Professor extends MY_Controller {
             exit;
         }
     }
+<<<<<<< HEAD
+=======
+    
+     /**
+     * Professor class routine
+     */
+    
+    function professor_by_department_and_branch($department,$branch)
+    {
+       $professor =  $this->Professor_model->get_many_by(array(
+                    'department' => $department,
+                    'branch' => $branch
+                ));
+        
+        echo json_encode($professor);
+    }
+    
+    function professor_class_routine() {
+        $this->load->view('professor/professor_class_routine');
+    }
+    
+     /**
+     * Class routine data
+     */
+    function class_routine_data() {
+        $class_routine = $this->Professor_model->professor_class_schedule();
+        //$class_routine = $this->db->get('class_routine')->result();
+        echo json_encode($class_routine);
+    }
+     /**
+     * Check class routine
+     */
+    function check_class_routine() {
+        date_default_timezone_set('Etc/UTC');
+        if ($_POST) {
+            require 'vendor/autoload.php';
+            $this->load->library('Class_routine_attendance');
+            $this->load->model('Crud_model');
+            if ($_POST) {
+                $class_routine = $this->Professor_model->class_routine_attendance($_POST);
+                $attendance_routine = array();
+                $selected_date = date('Y-m-d', strtotime($_POST['class_date']));
+                foreach ($class_routine as $row) {
+                    if ($row->RecurrenceRule) {
+                        //parse reccurrence rule
+                        $rule = $this->class_routine_attendance->parse_reccurrence_rule($row->RecurrenceRule);
+                        $rule_array = array();
+                        $reccur_rule = '';
+                        foreach ($rule as $key => $value) {
+                            $separate_rule = explode('=>', $value);
+                            $reccur_rule .= "'$separate_rule[0]' => '$separate_rule[1]'" . ';';
+                        }
+                        $conditional_rules = $this->class_routine_attendance->conditional_reccurrence_rule($reccur_rule);
+                        $conditional_rules['DTSTART'] = $row->Start;
+                        $rrule = new RRule\RRule($conditional_rules);
+                        foreach ($rrule as $occurrence) {
+                            if ($occurrence->format('Y-m-d') == $selected_date) {
+                                array_push($attendance_routine, $row);
+                                //echo $occurrence->format('Y-m-d');
+                                break;
+                            }
+                            //break;
+                        }
+                    } else {
+                        //single schedule event
+                        array_push($attendance_routine, $row);
+                    }
+                }
+            }
+            echo '<option value="">Select</option>';
+            foreach ($attendance_routine as $row) {
+                ?>
+                <option value="<?php echo $row->ClassRoutineId; ?>"><?php echo $row->subject_name . '--' . date('h:i A', strtotime($row->Start)) . '-' . date('h:i A', strtotime($row->End)); ?></option>
+                <?php
+            }
+        }
+    }
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
 }

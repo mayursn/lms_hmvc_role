@@ -28,5 +28,28 @@ class Project_document_submission_model extends MY_Model {
         $this->db->where("pm_semester", $semester);
         return $this->db->get()->result();
     }
+<<<<<<< HEAD
+=======
+    
+      /**
+     * submitted project
+     * @return mixed array
+     */
+    function get_all_submitted_project()
+    {
+        $this->db->select("ps.student_id,ps.project_id,ps.dos,ps.description,ps.document_file,pm_id,pm.pm_title,pm.pm_degree,pm.pm_course,pm.pm_batch,pm.pm_semester,s.std_id, s.std_first_name, s.std_last_name, s.email");
+        $this->db->from('project_document_submission ps');
+        $this->db->join("project_manager pm", "pm.pm_id=ps.project_id");
+        $this->db->join("student s", "s.std_id=ps.student_id");
+          if($this->session->userdata('professor_id'))
+        {
+            $dept = $this->session->userdata('professor_department');
+            $this->db->where("pm.pm_degree",$dept);
+        }
+        return  $this->db->get();
+    }
+    
+    
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
 }

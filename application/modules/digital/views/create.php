@@ -129,21 +129,46 @@
             type: "POST",
             url: "<?php echo base_url() . 'digital/get_cource/'; ?>",
             data: dataString,
+<<<<<<< HEAD
             success: function (response) {
+=======
+            success: function (response) {                
+                $('#course').find('option').remove().end();
+                $('#course').append('<option value>Select</option>');
+                $('#course').append('<option value="All">All</option>');
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 if (degree == "All")
                 {
                     $("#batch").val($("#batch option:eq(1)").val());
                     $("#course").val($("#course option:eq(1)").val());
                     $("#semester").val($("#semester option:eq(1)").val());
                 } else {
+<<<<<<< HEAD
                     $("#course").html(response);
+=======
+                    var branch = jQuery.parseJSON(response);
+                    console.log(branch);
+                    $.each(branch, function (key, value) {
+                        $('#course').append('<option value=' + value.course_id + '>' + value.c_name + '</option>');
+                    });
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 }
             }
         });
     });
 
 
+<<<<<<< HEAD
 
+=======
+$("#batch").change(function () {
+        var batches = $("#batch").val();
+        if (batches == 'All')
+        {
+            $("#semester").val($("#semester option:eq(1)").val());
+        }
+    });
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
 
 
@@ -161,12 +186,50 @@
                     url: "<?php echo base_url() . 'digital/get_semesterall/'; ?>",
                     data: {'course': course},
                     success: function (response1) {
+<<<<<<< HEAD
                         $("#semester").html(response1);
                         $("#semester").val($("#semester option:eq(1)").val());
                     }
                 });
                 //$("#semester").val($("#semester option:eq(1)").val());
                 $("#batch").html(response);
+=======
+                        $('#semester').find('option').remove().end();
+                        $('#semester').append('<option value>Select</option>');
+                        $('#semester').append('<option value="All">All</option>');
+                        if(course=="All")
+                        {
+                            $("#semester").val($("#semester option:eq(1)").val());
+                        }
+                        else{
+                            var sem_value = jQuery.parseJSON(response1);
+                            console.log(sem_value);
+                            $.each(sem_value, function (key, value) {
+                                $('#semester').append('<option value=' + value.s_id + '>' + value.s_name + '</option>');
+                            });
+                        }
+                         
+                        
+                        
+                    }
+                });
+                $('#batch').find('option').remove().end();
+                $('#batch').append('<option value>Select</option>');
+                $('#batch').append('<option value="All">All</option>');
+                //$("#semester").val($("#semester option:eq(1)").val());
+               if (course == "All")
+                {
+                    $("#batch").val($("#batch option:eq(1)").val());
+                    $("#semester").val($("#semester option:eq(1)").val());
+                } else {
+
+                    var batch_value = jQuery.parseJSON(response);
+                    console.log(batch_value);
+                    $.each(batch_value, function (key, value) {
+                        $('#batch').append('<option value=' + value.b_id + '>' + value.b_name + '</option>');
+                    });
+                }
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             }
         });
     });

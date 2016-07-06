@@ -17,7 +17,12 @@ class Studyresource extends MY_Controller {
         $this->load->model('branch/Course_model');
         $this->load->model('batch/Batch_model');
         $this->load->model('semester/Semester_model');
+<<<<<<< HEAD
         $this->load->model('classes/Class_model');        
+=======
+        $this->load->model('classes/Class_model');     
+       // $this->load->model('notification');
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
 
     function index() {
@@ -107,9 +112,15 @@ class Studyresource extends MY_Controller {
                     $student_ids = '';
                 }
                 $this->db->where("notification_type", "study_resources");
+<<<<<<< HEAD
                 $res = $this->db->get("notification_type")->result();
                 if ($res != '') {
                     $notification_id = $res[0]->notification_type_id;
+=======
+                $res = $this->db->get("notification_type")->row();
+                if ($res != '') {
+                    $notification_id = $res->notification_type_id;
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                     $notify['notification_type_id'] = $notification_id;
                     $notify['student_ids'] = $student_ids;
                     $notify['degree_id'] = $degree;
@@ -118,6 +129,10 @@ class Studyresource extends MY_Controller {
                     $notify['semester_id'] = $semester;
                     $notify['data_id'] = $last_id;
                     $this->db->insert("notification", $notify);
+<<<<<<< HEAD
+=======
+                 
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 }
                 $this->flash_notification('Study Resource Added Successfully');
                
@@ -176,6 +191,7 @@ class Studyresource extends MY_Controller {
      */
     function get_cource($param = '') {
         $did = $this->input->post("degree");
+<<<<<<< HEAD
         if ($did != '') {
             if ($did == "All") {
                 
@@ -192,6 +208,10 @@ class Studyresource extends MY_Controller {
                 echo $html;
             }
         }
+=======
+         $cource = $this->db->get_where("course", array("degree_id" => $did))->result_array();
+        echo json_encode($cource);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
 
     /**
@@ -201,6 +221,7 @@ class Studyresource extends MY_Controller {
     function get_batchs($param = '') {
         $cid = $this->input->post("course");
         $did = $this->input->post("degree");
+<<<<<<< HEAD
         $html = '';
         if ($cid != '') {
             if ($cid == "All") {
@@ -218,6 +239,10 @@ class Studyresource extends MY_Controller {
             }
             echo $html;
         }
+=======
+        $batch = $this->db->query("SELECT * FROM batch WHERE FIND_IN_SET('" . $did . "',degree_id) AND FIND_IN_SET('" . $cid . "',course_id)")->result_array();
+        echo json_encode($batch);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
 
     /**
@@ -227,10 +252,16 @@ class Studyresource extends MY_Controller {
 
         $cid = $this->input->post("course");
 
+<<<<<<< HEAD
         if ($cid == 'All') {
             $course = $this->db->get('course')->result_array();
         } else {
 
+=======
+        if($cid == 'All'){
+            $course = $this->db->get('course')->result_array();
+        }else{
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             $course = $this->db->get_where('course', array('course_id' => $cid))->result_array();
         }
 
@@ -257,6 +288,7 @@ class Studyresource extends MY_Controller {
      */
     function get_cource_all($param = '') {
         $did = $this->input->post("degree");
+<<<<<<< HEAD
         $html = '';
         if ($did != '') {
             if ($did == "All") {
@@ -277,6 +309,11 @@ class Studyresource extends MY_Controller {
             }
         }
         echo $html;
+=======
+        $this->load->model('branch/Course_model');
+       $cource = $this->Course_model->get_many_by(array("degree_id" => $did));
+       echo json_encode($cource);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
     
     
@@ -287,6 +324,7 @@ class Studyresource extends MY_Controller {
     function get_batchs_all($param = '') {
         $cid = $this->input->post("course");
         $did = $this->input->post("degree");
+<<<<<<< HEAD
         $html = '';
         if ($cid != '') {
             if ($cid == "All") {
@@ -305,6 +343,11 @@ class Studyresource extends MY_Controller {
             }
             echo $html;
         }
+=======
+        $this->load->model('batch/Batch_model');
+       $batch = $this->Batch_model->department_branch_batch($did,$cid);
+        echo json_encode($batch);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
     
      function getstudyresource() {
@@ -312,6 +355,7 @@ class Studyresource extends MY_Controller {
         $course = $this->input->post('course');
         $batch = $this->input->post('batch');
         $semester = $this->input->post("semester");
+<<<<<<< HEAD
         $data['course'] = $this->Crud_model->get_all_course_optimize();
         $data['semester'] = $this->Crud_model->get_all_semester_optimize();
         $data['batch'] = $this->Crud_model->get_all_batch_optimize();
@@ -321,36 +365,69 @@ class Studyresource extends MY_Controller {
         if ($degree == "All") {
             $this->db->select('study_id,study_title,study_degree,study_course,study_batch,study_sem,study_dos,study_filename');
             $data['studyresource'] = $this->db->get('study_resources')->result();
+=======
+        $this->data['course'] = $this->Course_model->order_by_column('c_name');
+        $this->data['semester'] = $this->Semester_model->order_by_column('s_name');
+        $this->data['batch'] = $this->Batch_model->order_by_column('b_name');
+        $this->data['degree'] = $this->Degree_model->order_by_column('d_name');
+        //   $data['student'] = $this->db->get('student')->result();
+
+        if ($degree == "All") {
+            
+            $this->data['studyresource'] = $this->Study_resources_model->order_by_column('study_id');
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         } else {
             if ($course == "All") {
                 $this->db->select('study_id,study_title,study_degree,study_course,study_batch,study_sem,study_dos,study_filename');
                 $this->db->where("study_degree", $degree);
+<<<<<<< HEAD
                 $data['studyresource'] = $this->db->get('study_resources')->result();
+=======
+                $array = array("study_degree"=> $degree);
+                $this->Study_resources_model->get_many_by('study_id');
+                $this->data['studyresource'] = $this->db->get('study_resources')->result();
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             } else {
                 if ($batch == 'All') {
                     $this->db->select('study_id,study_title,study_degree,study_course,study_batch,study_sem,study_dos,study_filename');
                     $this->db->where("study_course", $course);
                     $this->db->where("study_degree", $degree);
+<<<<<<< HEAD
                     $data['studyresource'] = $this->db->get('study_resources')->result();
+=======
+                    $this->data['studyresource'] = $this->db->get('study_resources')->result();
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 } else {
                     if ($semester == "All") {
                         $this->db->select('study_id,study_title,study_degree,study_course,study_batch,study_sem,study_dos,study_filename');
                         $this->db->where("study_batch", $batch);
                         $this->db->where("study_course", $course);
                         $this->db->where("study_degree", $degree);
+<<<<<<< HEAD
                         $data['studyresource'] = $this->db->get('study_resources')->result();
+=======
+                        $this->data['studyresource'] = $this->db->get('study_resources')->result();
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                     } else {
                         $this->db->select('study_id,study_title,study_degree,study_course,study_batch,study_sem,study_dos,study_filename');
                         $this->db->where("study_sem", $semester);
                         $this->db->where("study_batch", $batch);
                         $this->db->where("study_course", $course);
                         $this->db->where("study_degree", $degree);
+<<<<<<< HEAD
                         $data['studyresource'] = $this->db->get('study_resources')->result();
+=======
+                        $this->data['studyresource'] = $this->db->get('study_resources')->result();
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                     }
                 }
             }
         }
+<<<<<<< HEAD
         $this->load->view("studyresource/getstudyresource", $data);
+=======
+        $this->load->view("studyresource/getstudyresource", $this->data);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
     
        /**
@@ -360,6 +437,7 @@ class Studyresource extends MY_Controller {
     function get_courcestudy($param = '') {
 
         $did = $this->input->post("degree");
+<<<<<<< HEAD
 
         if ($did != '') {
 
@@ -377,6 +455,12 @@ class Studyresource extends MY_Controller {
             endforeach;
             echo $html;
         }
+=======
+        
+         $this->db->order_by('c_name','ASC');
+         $cource = $this->db->get_where("course", array("degree_id" => $did))->result_array();
+         echo json_encode($cource);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
 
 

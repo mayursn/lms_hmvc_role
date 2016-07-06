@@ -49,12 +49,16 @@ $delete = delete_permission($permission, 'Assignment');
                                             <option value="">Select</option>
                                         </select>
                                     </div>
+<<<<<<< HEAD
                                     <div class="form-group col-sm-2">
                                         <label><?php echo ucwords("Batch"); ?></label>
                                         <select id="filterbatch" name="batch_search" data-filter="5" class="form-control">
                                             <option value="">Select</option>
                                         </select>
                                     </div>                                
+=======
+                                                             
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                     <div class="form-group col-sm-2">
                                         <label> <?php echo ucwords("Semester"); ?></label>
                                         <select id="filtersemester" name="semester_search" data-filter="6" class="form-control">
@@ -63,6 +67,15 @@ $delete = delete_permission($permission, 'Assignment');
                                         </select>
                                     </div>
                                     <div class="form-group col-sm-2">
+<<<<<<< HEAD
+=======
+                                        <label><?php echo ucwords("Subject"); ?></label>
+                                        <select id="filtersubject" name="subject_search" data-filter="5" class="form-control">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>       
+                                    <div class="form-group col-sm-2">
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                         <label><?php echo ucwords("Class"); ?><span style="color:red"></span></label>
                                         <select class="form-control filter-rows" name="divclass" id="filterclass" >
                                             <option value="">Select</option>
@@ -89,9 +102,15 @@ $delete = delete_permission($permission, 'Assignment');
                                             <th>No</th>												
                                             <th>Assignment</th>
                                             <th>Department</th>
+<<<<<<< HEAD
                                             <th>Branch</th>												
                                             <th>Batch</th>												
                                             <th>Semester</th>
+=======
+                                            <th>Branch</th>												                                            
+                                            <th>Semester</th>
+                                            <th>Subject</th>												
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                             <th>Class</th>
                                             <th>Description</th>
                                             <th>File</th>
@@ -128,6 +147,7 @@ $delete = delete_permission($permission, 'Assignment');
                                                     }
                                                     ?>
                                                 </td>
+<<<<<<< HEAD
                                                 <td>
                                                     <?php
                                                     foreach ($batch as $bch) {
@@ -137,6 +157,9 @@ $delete = delete_permission($permission, 'Assignment');
                                                     }
                                                     ?>
                                                 </td>
+=======
+                                               
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 <td>
                                                     <?php
                                                     foreach ($semester as $sem) {
@@ -146,6 +169,16 @@ $delete = delete_permission($permission, 'Assignment');
                                                     }
                                                     ?>													
                                                 </td>
+<<<<<<< HEAD
+=======
+                                                 <td>
+                                                    <?php
+                                                      $this->load->model('subject/Subject_manager_model');
+                       $name = $this->Subject_manager_model->get_subject_name($row->sm_id);
+                       echo $name;
+                                                    ?>
+                                                </td>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 <td>
                                                     <?php
                                                     foreach ($class as $c) {
@@ -205,12 +238,16 @@ $delete = delete_permission($permission, 'Assignment');
                                             <option value="">Select</option>
                                         </select>
                                     </div>
+<<<<<<< HEAD
                                     <div class="form-group col-sm-2">
                                         <label><?php echo ucwords("Batch"); ?></label>
                                         <select id="submit-batch" name="batch_search" data-filter="5" class="form-control">
                                             <option value="">Select</option>
                                         </select>
                                     </div>                                
+=======
+                                                                   
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                     <div class="form-group col-sm-2">
                                         <label> <?php echo ucwords("Semester"); ?></label>
                                         <select id="submit-semester" name="semester_search" data-filter="6" class="form-control">
@@ -218,6 +255,15 @@ $delete = delete_permission($permission, 'Assignment');
 
                                         </select>
                                     </div>
+<<<<<<< HEAD
+=======
+                                    <div class="form-group col-sm-2">
+                                        <label><?php echo ucwords("Subject"); ?></label>
+                                        <select id="submit-subject" name="subject_search" data-filter="5" class="form-control">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div> 
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                     <div class="form-group col-sm-2" style="display: none;">
                                         <label><?php echo ucwords("Class"); ?><span style="color:red"></span></label>
                                         <select class="form-control filter-rows" name="divclass" id="submit-class" >
@@ -246,9 +292,15 @@ $delete = delete_permission($permission, 'Assignment');
                                             <th><div><?php echo ucwords("Assignment"); ?></div></th>
                                             <th><div><?php echo ucwords("Student"); ?></div></th>
                                             <th><div><?php echo ucwords("Department"); ?></div></th>
+<<<<<<< HEAD
                                             <th><div><?php echo ucwords("Branch"); ?></div></th>												
                                             <th><div><?php echo ucwords("Batch"); ?></div></th>												
                                             <th><div><?php echo ucwords("Sem"); ?></div></th>	
+=======
+                                            <th><div><?php echo ucwords("Branch"); ?></div></th>												                                           
+                                            <th><div><?php echo ucwords("Semester"); ?></div></th>	
+                                             <th><div><?php echo ucwords("Subject"); ?></div></th>												
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                             <th><div><?php echo ucwords("Submitted-date"); ?></div></th>	
                                             <th><div><?php echo ucwords("Comment"); ?></div></th>
                                             <th><div><?php echo ucwords("File"); ?></div></th>	
@@ -282,6 +334,7 @@ $delete = delete_permission($permission, 'Assignment');
                                                     }
                                                     ?>
                                                 </td>
+<<<<<<< HEAD
                                                 <td>
                                                     <?php
                                                     foreach ($batch as $bch) {
@@ -291,6 +344,9 @@ $delete = delete_permission($permission, 'Assignment');
                                                     }
                                                     ?>
                                                 </td>
+=======
+                                                
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 <td>
                                                     <?php
                                                     foreach ($semester as $sem) {
@@ -300,6 +356,15 @@ $delete = delete_permission($permission, 'Assignment');
                                                     }
                                                     ?>													
                                                 </td>	
+<<<<<<< HEAD
+=======
+                                                <td>
+                                                    <?php
+                                                    $name = $this->Subject_manager_model->get_subject_name($rowsub->sm_id);
+                                                    echo $name;
+                                                    ?>
+                                                </td>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 <td><?php echo date_formats($rowsub->submited_date); ?></td>	
                                                 <td><?php echo $rowsub->comment; ?></td>
                                                 <td id="downloadedfile"><a href="<?php echo base_url(); ?>uploads/project_file/<?php echo $rowsub->document_file; ?>" download="" title="download"><i class="fa fa-download"></i></a></td>                      	
@@ -321,9 +386,15 @@ $delete = delete_permission($permission, 'Assignment');
                                             <th><div><?php echo ucwords("Assignment"); ?></div></th>
                                             <th><div><?php echo ucwords("Student"); ?></div></th>
                                             <th><div><?php echo ucwords("Department"); ?></div></th>
+<<<<<<< HEAD
                                             <th><div><?php echo ucwords("Branch"); ?></div></th>												
                                             <th><div><?php echo ucwords("Batch"); ?></div></th>												
                                             <th><div><?php echo ucwords("Semester"); ?></div></th>	
+=======
+                                            <th><div><?php echo ucwords("Branch"); ?></div></th>												                                            												
+                                            <th><div><?php echo ucwords("Semester"); ?></div></th>	
+                                            <th><div><?php echo ucwords("Subject"); ?></div></th>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                             <th><div><?php echo ucwords("Submission date"); ?></div></th>	
                                             <th><div><?php echo ucwords("Submitted-date"); ?></div></th>	
                                             <th><div><?php echo ucwords("Comment"); ?></div></th>
@@ -344,15 +415,26 @@ $delete = delete_permission($permission, 'Assignment');
                                                     <?php   echo $rowlate->c_name;
                                                     ?>
                                                 </td>
+<<<<<<< HEAD
                                                 <td>
                                                     <?php   echo $rowlate->b_name;
                                                     ?>
                                                 </td>
+=======
+                                               
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 <td>
                                                     <?php
                                                             echo $rowlate->s_name;
                                                     ?>													
                                                 </td>	
+<<<<<<< HEAD
+=======
+                                                 <td>
+                                                    <?php   echo $rowlate->subject_name;
+                                                    ?>
+                                                </td>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 <td><?php echo date_formats($rowlate->assign_dos); ?></td>	
                                                 <td><?php echo date_formats($rowlate->submited_date); ?></td>	
                                                 <td><?php echo $rowlate->comment; ?></td>
@@ -383,12 +465,16 @@ $delete = delete_permission($permission, 'Assignment');
                                             <option value="">Select</option>
                                         </select>
                                     </div>
+<<<<<<< HEAD
                                     <div class="form-group col-sm-2">
                                         <label><?php echo ucwords("Batch"); ?></label>
                                         <select id="filter_batch" name="batch_search" data-filter="5" class="form-control">
                                             <option value="">Select</option>
                                         </select>
                                     </div>                                
+=======
+                                                                 
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                     <div class="form-group col-sm-2">
                                         <label> <?php echo ucwords("Semester"); ?></label>
                                         <select id="filter_semester" name="semester_search" data-filter="6" class="form-control">
@@ -396,6 +482,15 @@ $delete = delete_permission($permission, 'Assignment');
 
                                         </select>
                                     </div>
+<<<<<<< HEAD
+=======
+                                     <div class="form-group col-sm-2">
+                                        <label><?php echo ucwords("Subject"); ?></label>
+                                        <select id="filter_subject" name="subject_search" data-filter="5" class="form-control">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>  
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                     <div class="form-group col-sm-2">
                                         <label><?php echo ucwords("Class"); ?><span style="color:red"></span></label>
                                         <select class="form-control filter-rows" name="divclass" id="filter_class" >
@@ -454,7 +549,11 @@ $delete = delete_permission($permission, 'Assignment');
          $("#filter_class").change(function(){
               var degree = $("#filter_department").val();
                     var course = $("#filter_branch").val();
+<<<<<<< HEAD
                     var batch = $("#filter_batch").val();
+=======
+                    var subject = $("#filter_subject").val();
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                     var semester = $("#filter_semester").val();
                     var divclass = $("#filter_class").val();
                     $('#filter_assign').find('option').remove().end();
@@ -462,7 +561,11 @@ $delete = delete_permission($permission, 'Assignment');
                     $.ajax({
                         url: '<?php echo base_url(); ?>assignment/getassignment_list/',
                         type: 'post',
+<<<<<<< HEAD
                         data: {'degree': degree, "course": course, "batch": batch, "semester": semester, 'divclass': divclass},
+=======
+                        data: {'degree': degree, "course": course, "subject": subject, "semester": semester, 'divclass': divclass},
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                         success: function (content) {
                             var branch = jQuery.parseJSON(content);
                         console.log(branch);
@@ -485,6 +588,32 @@ $delete = delete_permission($permission, 'Assignment');
             batch_form_department_branch(department, branch_id);
             semester_from_branch(branch_id);
         });
+<<<<<<< HEAD
+=======
+        $('#filter_semester').on('change', function () {
+            var sem = $(this).val();
+            var branch = $('#filter_branch').val();
+            var department = $('#filter_department').val();
+            subject_get_not_submitted(department,branch,sem);
+        });
+        
+        function subject_get_not_submitted(department,branch,sem)
+        {
+              $('#filter_subject').find('option').remove().end();
+            $('#filter_subject').append('<option value>Select</option>');
+            $.ajax({
+                url: '<?php echo base_url(); ?>subject/subject_department_branch_sem/' + department + '/' + branch + '/' + sem ,
+                type: 'GET',
+                success: function (content) {
+                    var subject = jQuery.parseJSON(content);
+                    console.log(subject);
+                    $.each(subject, function (key, value) {
+                        $('#filter_subject').append('<option value=' + value.sm_id + '>' + value.subject_name + '</option>');
+                    });
+                }
+            });
+        }
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         
         function department_branch(department_id) {
             $('#filter_branch').find('option').remove().end();
@@ -597,7 +726,32 @@ $delete = delete_permission($permission, 'Assignment');
             batch_form_department_branch(department, branch_id);
             semester_from_branch(branch_id);
         });
+<<<<<<< HEAD
         
+=======
+        $('#filtersemester').on('change', function () {           
+            var sem = $(this).val();
+            var course = $('#filtercourse').val();
+            var department = $('#filterdegree').val();
+            subject_department_branch_sem(department,course,sem);
+            
+        });
+        function subject_department_branch_sem(department,course,sem)
+        {
+             $('#filtersubject').find('option').remove().end();
+            $('#filtersubject').append('<option value="">Select</option>');
+            $.ajax({
+                type: "GET",
+                url: "<?php echo base_url(); ?>subject/subject_department_branch_sem/" + department + '/' + course + '/' + sem ,
+                success: function (response) {
+                    var subject = jQuery.parseJSON(response);
+                    $.each(subject, function (key, value) {
+                        $('#filtersubject').append('<option value=' + value.sm_id + '>' + value.subject_name + '</option>');
+                    });
+                }
+            });
+        }
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         function department_branch(department_id) {
             $('#filtercourse').find('option').remove().end();
             $('#filtercourse').append('<option value>Select</option>');
@@ -666,14 +820,23 @@ $delete = delete_permission($permission, 'Assignment');
 
                     var degree = $("#filterdegree").val();
                     var course = $("#filtercourse").val();
+<<<<<<< HEAD
                     var batch = $("#filterbatch").val();
+=======
+                    var subject = $("#filtersubject").val();
+                    
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                     var semester = $("#filtersemester").val();
                     var divclass = $("#filterclass").val();
                   
                     $.ajax({
                         url: '<?php echo base_url(); ?>assignment/getassignment/allassignment',
                         type: 'post',
+<<<<<<< HEAD
                         data: {'degree': degree, "course": course, "batch": batch, "semester": semester, 'divclass': divclass},
+=======
+                        data: {'degree': degree, "course": course, "subject": subject, "semester": semester, 'divclass': divclass},
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                         success: function (content) {                        
                             $("#getresponse").html(content);
                             // $("#dtbl").hide();
@@ -697,7 +860,33 @@ $delete = delete_permission($permission, 'Assignment');
             batch_form_department_branch(department, branch_id);
             semester_from_branch(branch_id);
         });
+<<<<<<< HEAD
         
+=======
+        $('#submit-semester').on('change', function () {
+            var sem =  $(this).val();
+            var branch_id = $('#submit-branch').val();
+            var department = $('#submit-course').val();
+           subject_get_submitted(department,branch_id,sem);
+        });
+        
+        function subject_get_submitted(department,branch_id,sem)
+        {
+             $('#submit-subject').find('option').remove().end();
+            $('#submit-subject').append('<option value>Select</option>');
+            $.ajax({
+                url: '<?php echo base_url(); ?>subject/subject_department_branch_sem/' + department + '/' + branch_id + '/'+sem,
+                type: 'GET',
+                success: function (content) {
+                    var subject = jQuery.parseJSON(content);
+                    console.log(subject);
+                    $.each(subject, function (key, value) {
+                        $('#submit-subject').append('<option value=' + value.sm_id + '>' + value.subject_name + '</option>');
+                    });
+                }
+            });
+        }
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         function department_branch(department_id) {
             $('#submit-branch').find('option').remove().end();
             $('#submit-branch').append('<option value>Select</option>');
@@ -766,14 +955,22 @@ $delete = delete_permission($permission, 'Assignment');
 
                     var degree = $("#submit-course").val();
                     var course = $("#submit-branch").val();
+<<<<<<< HEAD
                     var batch = $("#submit-batch").val();
+=======
+                    var subject = $("#submit-subject").val();                                       
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                     var semester = $("#submit-semester").val();
                     var divclass = $("#submit-class").val();
                   
                     $.ajax({
                         url: '<?php echo base_url(); ?>assignment/getassignment/submitted',
                         type: 'post',
+<<<<<<< HEAD
                         data: {'degree': degree, "course": course, "batch": batch, "semester": semester},
+=======
+                        data: {'degree': degree, "course": course, "subject": subject, "semester": semester},
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                         success: function (content) {                        
                             $("#getsubmit").html(content);
                             // $("#dtbl").hide();

@@ -32,8 +32,13 @@ class Event extends MY_Controller
                 $data['event_date'] = date('Y-m-d H:i:s', strtotime($event_date.' '.$_POST['event_time']));                                
                 $data['event_end_date'] = $this->input->post('event_end_date');
                 $data['group_id'] = $this->input->post('group');
+<<<<<<< HEAD
             $this->Event_manager_model->insert($data);
             $this->session->set_flashdata('flash_message', 'Event is successfully added.');
+=======
+            $this->Event_manager_model->insert($data);            
+             $this->flash_notification('Event is successfully added.');   
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         }
 
         redirect(base_url('event'));
@@ -41,7 +46,11 @@ class Event extends MY_Controller
     
       function delete($id) {
         $this->Event_manager_model->delete($id);
+<<<<<<< HEAD
         $this->session->set_flashdata('flash_message', 'Event is successfully deleted.');
+=======
+         $this->flash_notification('Event is successfully deleted.');   
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
         redirect(base_url('event'));
     }

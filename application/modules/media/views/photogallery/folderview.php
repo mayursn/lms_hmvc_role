@@ -1,7 +1,17 @@
 <!-- Start .row -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/lightbox/css/lightbox.min.css">
   <link href="<?php echo base_url(); ?>assets/contextmenu/dist/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
+<<<<<<< HEAD
 
+=======
+<?php 
+
+$create = create_permission($permission, 'Media');
+$read = read_permission($permission, 'Media');
+$update = update_permisssion($permission, 'Media');
+$delete = delete_permission($permission, 'Media');
+?>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
  <style>
         .gallery_img {
             float: left;
@@ -43,8 +53,15 @@
             <?php $folder_name = $this->Photo_gallery_model->get_folder_name($folder_id); ?>
             <a class="links" href="<?php  $referred_from = $this->session->userdata('referred_from');
                  echo $referred_from; ?>">Go Back To <?php echo $folder_name; ?></a>
+<<<<<<< HEAD
             <a class="links"  onclick="showAjaxModal('<?php echo base_url(); ?>modal/popup/media_photogallery_create/<?php echo $folder_id; ?>');" href="#" id="navfixed" data-toggle="tab"><i class="fa fa-plus"></i> Folder</a>
             <a class="links"  onclick="showAjaxModal('<?php echo base_url(); ?>modal/popup/media_photogallery_createphoto/<?php echo $folder_id; ?>');" href="#" id="navfixed" data-toggle="tab"><i class="fa fa-plus"></i> Add Photos</a>
+=======
+             <?php if ($create) { ?>
+            <a class="links"  onclick="showAjaxModal('<?php echo base_url(); ?>modal/popup/media_photogallery_create/<?php echo $folder_id; ?>');" href="#" id="navfixed" data-toggle="tab"><i class="fa fa-plus"></i> Folder</a>
+            <a class="links"  onclick="showAjaxModal('<?php echo base_url(); ?>modal/popup/media_photogallery_createphoto/<?php echo $folder_id; ?>');" href="#" id="navfixed" data-toggle="tab"><i class="fa fa-plus"></i> Add Photos</a>
+             <?php } ?>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             <div class=panel-body>
                 
                 
@@ -94,6 +111,10 @@
             callback: function(key, options) {              
                 var m = "clicked: " + key;
                    var id = $(this).attr('id');
+<<<<<<< HEAD
+=======
+                     <?php if($delete) { ?>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                  if(key=="delete")
                  {
                       var txt;
@@ -112,6 +133,11 @@
     
                   
                   }
+<<<<<<< HEAD
+=======
+                     <?php  } ?>
+             <?php if ($update) { ?>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                   if(key=="edit")
                   {
                     var text = $("#rename-text"+id).html();
@@ -156,6 +182,11 @@
                         }
                       });
                   }
+<<<<<<< HEAD
+=======
+                    <?php } ?>
+                 
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                  
                 //window.console && console.log(m) || alert(m); 
             },

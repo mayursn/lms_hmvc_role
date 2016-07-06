@@ -7,6 +7,10 @@ class Course_model extends MY_Model {
     protected $primary_key = 'course_id';
     public $belongs_to = array('degree/degree');
     public $before_create = array('timestamps');
+<<<<<<< HEAD
+=======
+    public $before_get = array('course_filter');
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
     /**
      * Set the timestamp
@@ -18,6 +22,17 @@ class Course_model extends MY_Model {
         return $branch;
     }
 
+<<<<<<< HEAD
+=======
+    function course_filter()
+    {
+        if($this->session->userdata('professor_id'))
+        {
+            $dept = $this->session->userdata('professor_department');
+            $this->db->where("degree_id",$dept);
+        }
+    }
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     /**
      * Branch with degree
      * @return array

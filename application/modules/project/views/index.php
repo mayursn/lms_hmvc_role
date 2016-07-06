@@ -5,6 +5,11 @@ $create = create_permission($permission, 'Project');
 $read = read_permission($permission, 'Project');
 $update = update_permisssion($permission, 'Project');
 $delete = delete_permission($permission, 'Project');
+<<<<<<< HEAD
+=======
+ $this->load->model('classes/Class_model');
+                                            $class = $this->Class_model->order_by_column('class_name');
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 ?>
 <div class=row>                      
 
@@ -67,11 +72,21 @@ $delete = delete_permission($permission, 'Project');
                                         <select class="form-control filter-rows" name="filterclass" id="filterclass" >
                                             <option value="">Select</option>
                                             <?php
+<<<<<<< HEAD
                                             $this->db->select('class_id,class_name');
                                             $class = $this->db->get('class')->result_array();
                                             foreach ($class as $c) {
                                                 ?>
                                                 <option value="<?php echo $c['class_id'] ?>"><?php echo $c['class_name'] ?></option>
+=======
+                                           
+                                            //$this->db->select('class_id,class_name');
+                                             //$this->db->get('class')->result_array();
+                                            
+                                            foreach ($class as $c) {
+                                                ?>
+                                                <option value="<?php echo $c->class_id ?>"><?php echo $c->class_name; ?></option>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 <?php
                                             }
                                             ?>
@@ -130,7 +145,11 @@ $delete = delete_permission($permission, 'Project');
                                                     }
                                                     if (count($stu) > 2) {
                                                         ?>
+<<<<<<< HEAD
                                                         <a onclick="showAjaxModal('<?php echo base_url(); ?>modal/popup/view_student_name/<?php echo $row->pm_id; ?>');" style="cursor:pointer; text-decoration: none;">Read More</a>
+=======
+                                                        <a onclick="showAjaxModal('<?php echo base_url(); ?>modal/popup/project_studentname/<?php echo $row->pm_id; ?>');" style="cursor:pointer; text-decoration: none;">Read More</a>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                         <?php
                                                     }
                                                     ?>
@@ -175,8 +194,13 @@ $delete = delete_permission($permission, 'Project');
                                                 <td>
                                                     <?php
                                                     foreach ($class as $c) {
+<<<<<<< HEAD
                                                         if ($c['class_id'] == $row->class_id) {
                                                             echo $c['class_name'];
+=======
+                                                        if ($c->class_id == $row->class_id) {
+                                                            echo $c->class_name;
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                         }
                                                     }
                                                     ?>
@@ -195,6 +219,10 @@ $delete = delete_permission($permission, 'Project');
                                                     ?>
                                                 </td>
                                                 <td><?php echo date_formats($row->pm_dos); ?></td>	
+<<<<<<< HEAD
+=======
+                                                   <?php if($update  || $delete){ ?>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 <td class="menu-action">
                                                     <?php if($update ){ ?>
                                                     <a href="#" onclick="showAjaxModal('<?php echo base_url(); ?>modal/popup/project_edit/<?php echo $row->pm_id; ?>');"  data-toggle="tooltip" data-placement="top" ><span class="label label-primary mr6 mb6"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</span></a>
@@ -203,6 +231,10 @@ $delete = delete_permission($permission, 'Project');
                                                     <a href="#" onclick="confirm_modal('<?php echo base_url(); ?>project/delete/<?php echo $row->pm_id; ?>');"  data-toggle="tooltip" data-placement="top" ><span class="label label-danger mr6 mb6"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</span></a>
                                                     <?php } ?>
                                                 </td>
+<<<<<<< HEAD
+=======
+                                                   <?php } ?>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                             </tr>
                                         <?php endforeach; ?>															
                                     </tbody>
@@ -253,10 +285,17 @@ $delete = delete_permission($permission, 'Project');
                                         <select class="form-control filter-rows" name="filterclass" id="submit-class" >
                                             <option value="">Select</option>
                                             <?php
+<<<<<<< HEAD
 //$class = $this->db->get('class')->result_array();
                                             foreach ($class as $c) {
                                                 ?>
                                                 <option value="<?php echo $c['class_id'] ?>"><?php echo $c['class_name'] ?></option>
+=======
+                                          
+                                            foreach ($class as $c) {
+                                                ?>
+                                                <option value="<?php echo $c->class_id; ?>"><?php echo $c->class_name; ?></option>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                 <?php
                                             }
                                             ?>
@@ -408,7 +447,11 @@ $delete = delete_permission($permission, 'Project');
         $.ajax({
             url: '<?php echo base_url(); ?>branch/department_branch/' + department_id,
             type: 'GET',
+<<<<<<< HEAD
             success: function (content) {
+=======
+            success: function (content) {                
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 var branch = jQuery.parseJSON(content);
                 console.log(branch);
                 $.each(branch, function (key, value) {

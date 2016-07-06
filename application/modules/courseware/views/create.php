@@ -108,10 +108,14 @@ $("#branch").change(function(){
     $.ajax({
         type:"POST",
         dataType:'json',
+<<<<<<< HEAD
         url:"<?php echo base_url(); ?>courseware/getsubject",
         data:{
             'id':id,
     },
+=======
+        url:"<?php echo base_url(); ?>subject/branch_subject/"+id,
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         success:function(response)
         {
             var option;

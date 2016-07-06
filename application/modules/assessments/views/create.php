@@ -26,15 +26,26 @@
                                     <tr>
                                         <th width="20%"><?php echo ucwords("Student-Name"); ?></th>
                                         <th width="20%"><?php echo ucwords("Department "); ?></th>
+<<<<<<< HEAD
                                         <th width="20%"><?php echo ucwords("Branch "); ?></th>
                                         <th width="20%"><?php echo ucwords("Batch "); ?></th>
                                         <th width="20%"><?php echo ucwords("Semester "); ?></th>
+=======
+                                        <th width="20%"><?php echo ucwords("Branch "); ?></th>                                    
+                                        <th width="20%"><?php echo ucwords("Semester "); ?></th>
+                                        
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                     </tr>
                                 </thead>
                                 <?php
                                 $degree = $this->db->get_where("degree", array("d_id" => $assessment[0]->std_degree))->result();
                                 $course = $this->db->get_where("course", array("course_id" => $assessment[0]->course_id))->result();
+<<<<<<< HEAD
                                 $batch = $this->db->get_where("batch", array("b_id" => $assessment[0]->std_batch))->result();
+=======
+                                
+                             
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                 $semester = $this->db->get_where("semester", array("s_id" => $assessment[0]->semester_id))->result();
                                 ?>
                                 <tbody>
@@ -45,7 +56,11 @@
                                     }
                                     ?></td>
                                 <td width="20%"><?php echo $course[0]->c_name; ?></td>
+<<<<<<< HEAD
                                 <td width="20%"><?php echo $batch[0]->b_name; ?></td>
+=======
+                             
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                 <td width="20%"><?php echo $semester[0]->s_name; ?></td>
 
                                 </tbody>

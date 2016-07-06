@@ -23,9 +23,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
+<<<<<<< HEAD
 date_default_timezone_set('Asia/Kolkata');
 ini_set('max_execution_time', 500);
 $config['base_url'] = 'http://192.168.1.28/lms_hmvc_role/';
+=======
+//date_default_timezone_set('Etc/UTC');
+ini_set('max_execution_time', 500);
+date_default_timezone_set('Asia/Kolkata');
+$config['base_url'] = 'http://192.168.1.36/lms_hmvc_role/';
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
 /*
 |--------------------------------------------------------------------------

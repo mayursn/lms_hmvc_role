@@ -779,7 +779,11 @@ class MY_Model extends CI_Model {
         $method = ($multi) ? 'result' : 'row';
         return $this->_temporary_return_type == 'array' ? $method . '_array' : $method;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     /**
      * Grab data by order
      * @param string $column
@@ -788,6 +792,7 @@ class MY_Model extends CI_Model {
      */
     public function order_by_column($column, $order = 'ASC') {
         $this->_database->order_by($column, $order);
+<<<<<<< HEAD
 
         return $this->get_all();
     }
@@ -829,4 +834,10 @@ class MY_Model extends CI_Model {
         return $this->_database->get()->row;
     }
 
+=======
+        
+        return $this->get_all();
+    }
+
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 }

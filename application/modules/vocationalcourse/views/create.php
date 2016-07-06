@@ -16,19 +16,31 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label"><?php echo ucwords("course name"); ?><span style="color:red">*</span></label>
                             <div class="col-sm-8">
+<<<<<<< HEAD
                                 <input type="text" class="form-control" name="course_name" id="course_name"/>
+=======
+                                <input type="text" class="form-control" value="" name="course_name" id="course_name"/>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                             </div>
                         </div>	
                         <div class="form-group">
                             <label class="col-sm-4 control-label"><?php echo ucwords("start date"); ?><span style="color:red">*</span></label>
                             <div class="col-sm-8">
+<<<<<<< HEAD
                                 <input type="text" class="form-control" name="startdate" id="startdate"/>
+=======
+                                <input type="text" class="form-control" value="" name="startdate" id="startdate"/>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                             </div>	
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label"><?php echo ucwords("end date"); ?><span style="color:red">*</span></label>
                             <div class="col-sm-8">
+<<<<<<< HEAD
                                 <input type="text" class="form-control" name="enddate" id="enddate"/>
+=======
+                                <input type="text" class="form-control"  value="" name="enddate" id="enddate"/>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                             </div>	
                         </div>
                          <div class="form-group">
@@ -49,7 +61,11 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label"><?php echo ucwords("course fee"); ?><span style="color:red">*</span></label>
                             <div class="col-sm-8">
+<<<<<<< HEAD
                                 <input type="text" class="form-control" name="fee" id="fee"/>
+=======
+                                <input type="text" class="form-control" value="" name="fee" id="fee"/>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                             </div>	
                         </div>
                         <div class="form-group">

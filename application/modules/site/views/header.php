@@ -35,6 +35,7 @@
                                 <div class="cs-user">
                                     <ul>                                        
                                         <?php
+<<<<<<< HEAD
                                         $login_type = $this->session->userdata('login_type');
                                         if ($login_type != '') {
                                             switch ($login_type) {
@@ -82,6 +83,21 @@
                                                     $image = base_url('uploads/professor/' . $professor->image_path);
                                                     break;
                                             }
+=======
+                                        $login_type = $this->session->userdata('user_id');
+                                        if ($login_type != '') {
+                                            
+                                                   //find sub admin details                                        
+                                                $this->load->model('user/User_model');
+                                                $user_id = $this->session->userdata('user_id');
+                                                $user =  $this->User_model->get($user_id);   
+
+                                                    $name = $user->first_name.' '.$user->last_name;
+                                                    $dashboard_url = base_url('user/dashboard/');
+                                                    $profile_url = base_url('user/manage_profile');
+                                                    $image = base_url('uploads/system_image/'.$user->profile_pic);
+                                           
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                             ?>
                                             <li>
                                                 <div class="cs-user-login">
@@ -92,7 +108,11 @@
                                                     <ul>
                                                         <li><a href="<?php echo $dashboard_url; ?>"><i class="icon-user3"></i> Dashboard</a></li>
                                                         <li><a href="<?php echo $profile_url; ?>"><i class="icon-gear"></i> Profile</a></li>
+<<<<<<< HEAD
                                                         <li><a href="<?php echo base_url('site/logout'); ?>"><i class="icon-log-out"></i> Logout</a></li>
+=======
+                                                        <li><a href="<?php echo base_url('user/logout'); ?>"><i class="icon-log-out"></i> Logout</a></li>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                                     </ul>
                                                 </div>
                                             </li>

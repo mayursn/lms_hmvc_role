@@ -38,7 +38,11 @@
                 <td><?php echo $row->address; ?></td>
                 <td class="menu-action">	
 
+<<<<<<< HEAD
                     <a href="#" onclick="showAjaxModal('<?php echo base_url(); ?>modal/popup/student_edit/<?php echo $row->std_id; ?>');"  data-toggle="tooltip" data-placement="top"><span class="label label-primary mr6 mb6"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</span></a>
+=======
+                    <a href="#" onclick="showAjaxModal('<?php echo base_url(); ?>modal/popup/modal_edit_student/<?php echo $row->std_id; ?>');"  data-toggle="tooltip" data-placement="top"><span class="label label-primary mr6 mb6"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</span></a>
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
                 </td>											
             </tr>

@@ -19,6 +19,14 @@ class Participate extends MY_Controller {
         $this->load->model('classes/Class_model');
         $this->load->model('student/Student_model');
         $this->load->model('participate/Survey_question_model');
+<<<<<<< HEAD
+=======
+        $this->load->model('participate/Student_upload_model');
+        $this->load->model('participate/Survey_model');
+        $this->load->model('participate/Participate_student_model');
+          
+        
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
     
     /**
@@ -214,6 +222,7 @@ class Participate extends MY_Controller {
      * @param string $param
      */
     function get_cource($param = '') {
+<<<<<<< HEAD
         $did = $this->input->post("degree");
         if ($did != '') {
             if ($did == "All") {
@@ -231,6 +240,11 @@ class Participate extends MY_Controller {
                 echo $html;
             }
         }
+=======
+         $did = $this->input->post("degree");
+         $cource = $this->db->get_where("course", array("degree_id" => $did))->result_array();
+        echo json_encode($cource);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
 
     /**
@@ -238,6 +252,7 @@ class Participate extends MY_Controller {
      * @param string $param
      */
     function get_batchs($param = '') {
+<<<<<<< HEAD
         $cid = $this->input->post("course");
         $did = $this->input->post("degree");
         $html = '';
@@ -257,6 +272,12 @@ class Participate extends MY_Controller {
             }
             echo $html;
         }
+=======
+       $cid = $this->input->post("course");
+        $did = $this->input->post("degree");
+        $batch = $this->db->query("SELECT * FROM batch WHERE FIND_IN_SET('" . $did . "',degree_id) AND FIND_IN_SET('" . $cid . "',course_id)")->result_array();
+        echo json_encode($batch);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
 
     /**
@@ -264,7 +285,11 @@ class Participate extends MY_Controller {
      */
     function get_semesterall() {
 
+<<<<<<< HEAD
         $cid = $this->input->post("course");
+=======
+         $cid = $this->input->post("course");
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
         if ($cid == 'All') {
             $course = $this->db->get('course')->result_array();
@@ -281,6 +306,7 @@ class Participate extends MY_Controller {
                 $semdata[] = $sem;
             }
         }
+<<<<<<< HEAD
         $option = "<option value=''>Select semester</option>";
         $option .="<option value='All'>All</option>";
 
@@ -288,6 +314,172 @@ class Participate extends MY_Controller {
             $option .="<option value=" . $s['s_id'] . ">" . $s['s_name'] . "</option>";
         }
         echo $option;
+=======
+        echo json_encode($semdata);
+    }
+    
+    function upload()
+    {
+         if (strtolower($_SERVER['REQUEST_METHOD']) == "post") {
+            $config['upload_path'] = 'uploads/project_file';
+            $config['allowed_types'] = '*';
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            //$this->upload->set_allowed_types('*');
+            if (!$this->upload->do_upload('fileupload')) {
+                $this->flash_notification( 'Please upload valid file.');
+                redirect(base_url() . 'participate/upload/', 'refresh');
+            } else {
+                $file = $this->upload->data();
+                $data['upload_file_name'] = $file['file_name'];
+                $file_url = base_url() . 'uploads/project_file/' . $data['upload_file_name'];
+                $data['upload_url'] = $file_url;
+            }
+            $data['upload_title'] = $this->input->post('title');
+            $data['upload_desc'] = $this->input->post('description');
+            $data['std_id'] = $this->session->userdata('std_id');            
+            $this->Student_upload_model->insert($data);
+            $this->flash_notification('Detail is successfully added.');
+            redirect(base_url() . 'participate/upload/', 'refresh');
+        }
+        
+       $this->data['upload_data'] = $this->Student_upload_model->getstudent_upload();
+        $this->data['page'] = 'upload_data';
+        $this->data['title'] = 'Upload';
+         $this->__template('participate/uploads', $this->data);
+    }
+    
+    function survey()
+    {
+        if($_POST)
+        {
+             $std_id = $this->session->userdata("std_id");
+            foreach ($_POST as $key => $val):
+
+                if (strpos($key, 'question_id') !== false) {
+                    $id = explode("question_id", $key);
+                    if ($val != '') {
+                        $sq_id = $id[1];
+                        $this->addrating($sq_id, $val, $std_id);
+                    }
+                }
+
+
+            endforeach;
+
+
+            $survey = $this->Survey_question_model->get_survey_question();
+            $count = 1;
+            foreach ($survey as $res) {
+                // echo $count;
+                $question[] = $this->input->post('question_id' . $count);
+                $field[] = $this->input->post('Field' . $count);
+                $que = implode(",", $question);
+                $status = implode(",", $field);
+                $count++;
+            }
+
+
+            $insert_data = array_combine(explode(",", $que), explode(",", $status));
+            
+            $data['sq_id'] = $que;
+            $data['survey_status'] = $status;
+
+            $data['student_id'] = $this->session->userdata('std_id');
+
+            $this->db->insert('survey_list', $data);
+            
+            $this->flash_notification('Survey added successfully');
+            redirect(base_url() . 'participate/survey', 'refresh');
+        }
+        $std = $this->session->userdata("std_id");
+        $this->data['survey'] = $this->Survey_model->get_student_survey();
+        $this->data['page'] = 'participate';
+        $this->data['title'] = 'Survey Application Form';
+        $this->data['param'] = '';
+        $this->__template('participate/survey', $this->data);
+    }
+
+     /*
+     * Add Rating to survey question
+     */
+
+    function addrating($id, $rating, $std_id) {
+        // $id  = $this->input->post('id');  
+        // $rating = $this->input->post('rating'); 
+        // $std_id = $this->session->userdata('login_user_id');
+        $data['sq_id'] = $id;
+        $data['student_id'] = $std_id;
+        $data['std_rating'] = $rating;
+        $count = $this->Survey_model->getrepeat($data);
+        if ($count > 0) {
+            $udata['std_rating'] = $rating;
+            $this->Survey_model->updatesurveyrating($udata, $id, $std_id);
+        } else {
+            $this->Survey_model->insert($data);
+        }
+    }
+    
+     /**
+     * Volunteer
+     * @param string $param
+     */
+    function volunteer($param = '') {
+        if ($param == "create") {
+            $p_id = $this->input->post('pp_id');
+            $std_id = $this->input->post('std_id');
+            $status = $this->input->post('p_status');
+            
+            $get_by_many = array('pp_id' => $p_id, 'student_id' => $std_id);
+           $res = $this->Participate_student_model->count_by($get_by_many);
+            
+            if ($res > 0) {
+                $this->flash_notification('Data already exists');
+                redirect(base_url() . 'participate/volunteer/', 'refresh');
+            }
+            $data['pp_id'] = $this->input->post('pp_id');
+            $data['student_id'] = $this->input->post('std_id');
+            $data['p_status'] = $this->input->post('p_status');
+            $data['comment'] = $this->input->post('comment');
+           // $this->db->insert("participate_student", $data);
+            $this->Participate_student_model->insert( $data);
+            
+            $this->flash_notification('Participation successfully');
+            redirect(base_url() . 'participate/volunteer', 'refresh');
+        }
+        clear_notification('participate_manager', $this->session->userdata('std_id'));
+        unset($this->session->userdata('notifications')['participate_manager']);
+        $this->data['page'] = 'participate_form';
+        $this->data['title'] = 'Volunteer Form';
+        $this->__template('participate/participate_form', $this->data);
+    }
+
+    function get_desc()
+    {
+          $pp_id = $this->input->post('pp_id');
+        if ($pp_id != "") {
+            $res =$this->Participate_manager_model->get($pp_id);
+            $date = date_formats($res->pp_dos);
+            $json = array("pp_desc" => $res->pp_desc, "pp_dos" => $date);
+            echo json_encode($json);
+        }
+    }
+    
+     /* worked by Mayur Panchal 29-3-2016 */
+
+    /**
+     * confirm participate
+     * @param int $param
+     */
+    function confirmparticipate($param = '') {
+        if ($param != '') {
+            $pp_id = $param;
+            $this->Participate_student_model->delete($pp_id);
+            
+            $this->flash_notification('Volunteer Disapprove Successfully');
+            redirect(base_url('participate'));
+        }
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     }
 
 }

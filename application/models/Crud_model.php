@@ -2076,5 +2076,52 @@ class Crud_model extends CI_Model {
                             'exam_id' => $exam
                         ])->get()->result();
     }
+<<<<<<< HEAD
+=======
+    
+     function get_late_submitted_assignment()
+    {
+        $this->db->select("a.*,ass.*,d.d_name,c.c_name,b.b_name,s.s_name,cl.class_name,st.name,date_format(ass.submited_date, ('%Y-%m-%d')) as submitted_date, date_format(a.assign_dos, ('%Y-%m-%d')) as assign_submission_date");
+        $this->db->join('assignment_manager a','a.assign_id=ass.assign_id');
+        $this->db->join('degree d','d.d_id=a.assign_degree');
+        $this->db->join('course c','c.course_id=a.course_id');
+        $this->db->join('batch b','b.b_id=a.assign_batch');
+        $this->db->join('semester s','s.s_id=a.assign_sem');
+        $this->db->join('class cl','cl.class_id=a.class_id');
+        $this->db->join('student st','st.std_id=ass.student_id');
+        $where = "a.assign_dos < ass.submited_date";
+        $this->db->where($where);
+        return $this->db->get('assignment_submission as ass')->result();
+        
+        //return $this->db->query("SELECT * FROM assignment_submission LEFT JOIN assignment_manager ON assignment_manager.assign_id=assignment_submission.assign_id WHERE assignment_submission.submited_date > assignment_manager.assign_dos")->result();    }
+    }
+    
+    
+    /**
+     * late submitted assignment
+     * @return mixed
+     */
+    function get_not_submitted_assignment()
+    {        
+        $this->db->select();            
+        $this->db->from('student st');
+        $this->db->join('assignment_submission ass','ass.assign_id=a.assign_id');        
+        $date=  date('Y-m-d');        
+        $this->db->where("a.assign_dos < ",$date);
+        $this->db->join('degree d','d.d_id=a.assign_degree');
+        $this->db->join('course c','c.course_id=a.course_id');
+        $this->db->join('batch b','b.b_id=a.assign_batch');
+        $this->db->join('semester s','s.s_id=a.assign_sem');
+        $this->db->join('class cl','cl.class_id=a.class_id');
+        $this->db->where_not_in('st.std_id','ass.student_id');
+        $this->db->where('st.std_degree','a.assign_degree');
+        $this->db->where('st.course_id','a.course_id');
+        $this->db->where('st.std_batch','a.assign_batch');
+        $this->db->where('st.semester_id','a.assign_sem');
+        $this->db->where('st.class_id','a.class_id');
+        return $this->db->get('assignment_manager a')->result();
+    }
+    
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
 }

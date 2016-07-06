@@ -4,7 +4,11 @@ $(document).ready(function () {
      $("#minute-step-timepicker").val("");
     $("#todo-addform").hide();
     $("#basic-datepicker").datepicker({
+<<<<<<< HEAD
         format: ' MM dd, yyyy',
+=======
+        format: js_date_format,
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         startDate: new Date(),
         autoclose: true,
     });
@@ -34,7 +38,11 @@ $(document).ready(function () {
         var dataString = "id=" + id;
         $.ajax({
             type: "POST",
+<<<<<<< HEAD
             url: base_url+"student/removetodolist",
+=======
+            url: base_url+"todo/removetodolist",
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             data: dataString,
             success: function () {
  $("#todo-task-item-id"+id).hide();
@@ -82,7 +90,11 @@ jQuery('#addnewtodo').on('click', function (event) {
                      return false;
                 }
                         var dataString = "title=" + encodeURIComponent(title) + "&todo_date=" + todo_date + "&todo_time=" + todo_time;
+<<<<<<< HEAD
                         $.post(base_url+"student/add_to_do", dataString
+=======
+                        $.post(base_url+"todo/add_to_do_student", dataString
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                          ,                        
                         function(data){                            
                           $(".todo-list").html(data);
@@ -101,7 +113,11 @@ jQuery('#addnewtodo').on('click', function (event) {
 
             $.ajax({
                 type: "POST",
+<<<<<<< HEAD
                 url: base_url+"student/changestatus",
+=======
+                url: base_url+"todo/changestatus",
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 data: dataString,
                 success: function () {
 
@@ -116,7 +132,11 @@ jQuery('#addnewtodo').on('click', function (event) {
 
             $.ajax({
                 type: "POST",
+<<<<<<< HEAD
                 url: base_url+"student/changestatus",
+=======
+                url: base_url+"todo/changestatus",
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 data: dataString,
                 success: function () {
 
@@ -135,7 +155,11 @@ jQuery('#addnewtodo').on('click', function (event) {
         var id = $(this).val();
         $.ajax({
             type: "GET",
+<<<<<<< HEAD
             url: base_url+"student/todoupdateform/" + id,
+=======
+            url: base_url+"todo/student_todoupdateform/" + id,
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             success: function (response)
             {
                 $("#updateformhtml").html(response);

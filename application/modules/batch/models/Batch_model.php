@@ -29,5 +29,12 @@ class Batch_model extends MY_Model {
         
         return $batch;
     }
+<<<<<<< HEAD
+=======
+    
+    
+    
+    
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
 }

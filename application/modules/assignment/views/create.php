@@ -28,8 +28,13 @@
                                 <select name="degree" id="degree" class="form-control">
                                     <option value="">Select department</option>
                                     <?php
+<<<<<<< HEAD
                                     $this->db->select('d_id,d_name,d_status');
                                     $degree = $this->db->get_where('degree', array('d_status' => 1))->result();
+=======
+                                    $this->load->model('department/Degree_model');
+                                    $degree = $this->Degree_model->get_all();
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                                     foreach ($degree as $dgr) {
                                         ?>
                                         <option value="<?= $dgr->d_id ?>"><?= $dgr->d_name ?></option>
@@ -47,6 +52,7 @@
                                     <option value="">Select Branch</option>
                                 </select>
                             </div>
+<<<<<<< HEAD
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label"><?php echo ucwords("Batch"); ?><span style="color:red">*</span></label>
@@ -57,6 +63,9 @@
                                 </select>
                             </div>
                         </div>	
+=======
+                        </div>                     
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                         <div class="form-group">
                             <label class="col-sm-4 control-label"><?php echo ucwords("Semester"); ?><span style="color:red">*</span></label>
                             <div class="col-sm-8">
@@ -93,6 +102,17 @@
                             </div>
                         </div>
                         <div class="form-group">
+<<<<<<< HEAD
+=======
+                            <label class="col-sm-4 control-label"><?php echo ucwords("subject"); ?><span style="color:red">*</span></label>
+                            <div class="col-sm-8">
+                                <select name="subject" id="subject" class="form-control">
+                                    <option value="">Select subject</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                             <label class="col-sm-4 control-label"><?php echo ucwords("Submission Date"); ?><span style="color:red">*</span></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" readonly="" name="submissiondate" id="submissiondate" />
@@ -138,10 +158,22 @@
         });
         $('#course').on('change', function () {
             var branch_id = $(this).val();
+<<<<<<< HEAD
             var department = $('#degree').val();
             batch_form_department_branch(department, branch_id);
             semester_from_branch(branch_id);
         });
+=======
+            var department = $('#degree').val();            
+            semester_from_branch(branch_id);
+        });
+         $('#semester').on('change', function () {
+             var semester = $(this).val();
+            var branch_id = $("#course").val();
+            var department = $('#degree').val();    
+            subject_list_from_department_branch_semester(department,branch_id,semester);
+        });
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
         
         function department_branch(department_id) {
             $('#course').find('option').remove().end();
@@ -158,6 +190,25 @@
                 }
             });
         }
+<<<<<<< HEAD
+=======
+        
+        function subject_list_from_department_branch_semester(department, branch, semester)
+        {
+              $('#subject').find('option').remove().end();
+            $('#subject').append('<option value>Select</option>');
+            $.ajax({
+                type: "GET",
+                url: "<?php echo base_url(); ?>subject/subject_department_branch_sem/" + department + '/' + branch + '/' + semester ,
+                success: function (response) {
+                    var subject = jQuery.parseJSON(response);
+                    $.each(subject, function (key, value) {
+                        $('#subject').append('<option value=' + value.sm_id + '>' + value.subject_name + '</option>');
+                    });
+                }
+            });
+        }
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
 
         function batch_form_department_branch(department, branch) {
             $('#batch').find('option').remove().end();
@@ -191,9 +242,15 @@
     });
     $("#btnadd").click(function (event) {
   
+<<<<<<< HEAD
         if ($("#title").val() != null & $("#degree").val() != null & $("#batch").val() != null & $("#semester").val() != null & $("#course").val() != null)
         {
             
+=======
+        if ($("#title").val() != null & $("#degree").val() != null & $("#subject").val() != null & $("#semester").val() != null & $("#course").val() != null)
+        {
+           
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             $.ajax({
                 type: "POST",
                 url: "<?php echo base_url() . 'assignment/checkassignments'; ?>",
@@ -204,12 +261,20 @@
                             'title': $("#title").val(),
                             'semester': $("#semester").val(),
                             'degree': $("#degree").val(),
+<<<<<<< HEAD
                             'batch': $("#batch").val(),
                             'course': $("#course").val()
                         },
                 success: function (response) {
                 
 
+=======
+                            'subject': $("#subject").val(),
+                            'course': $("#course").val()
+                        },
+                success: function (response) {    
+                   
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                     if (response.length == 0) {
                         $("#error_lable_exist").html('');
                         $('#frmassignment').attr('validated', true);
@@ -262,6 +327,10 @@
                 semester: {
                     required: true,
                 },
+<<<<<<< HEAD
+=======
+                subject:"required",
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 submissiondate: "required",
                 assignmentfile: {
                     required: true,
@@ -279,6 +348,10 @@
                 semester: {
                     required: "Select semester",
                 },
+<<<<<<< HEAD
+=======
+                subject:"Select Subject",
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 submissiondate: "Select date of submission",
                 assignmentfile: {
                     required: "Upload file",

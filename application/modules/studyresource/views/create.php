@@ -1,6 +1,7 @@
 
 <div class="row">
     <div class="col-md-12">
+<<<<<<< HEAD
         
         <div class="panel-default toggle panelMove panelClose panelRefresh">
             <!-- Start .panel -->
@@ -8,6 +9,10 @@
                             <h4 class=panel-title>  <?php echo ucwords("Add Study Resources"); ?></h4>                
                         </div>    -->
 
+=======
+
+        <div class="panel-default toggle panelMove panelClose panelRefresh">
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             <div class="panel-body"> 
 
                 <div class="box-content">  
@@ -142,8 +147,17 @@
             url: "<?php echo base_url() . 'studyresource/get_cource/'; ?>",
             data: dataString,
             success: function (response) {
+<<<<<<< HEAD
                 if (degree == "All")
                 {
+=======
+                $('#course').find('option').remove().end();
+                $('#course').append('<option value>Select</option>');
+                $('#course').append('<option value="All">All</option>');
+                if (degree == "All")
+                {
+
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                     $("#batch").val($("#batch option:eq(1)").val());
                     $("#course").val($("#course option:eq(1)").val());
                     $("#semester").val($("#semester option:eq(1)").val());
@@ -153,9 +167,19 @@
 
 
                 } else {
+<<<<<<< HEAD
 
 
                     $("#course").html(response);
+=======
+                    var branch = jQuery.parseJSON(response);
+                    console.log(branch);
+                    $.each(branch, function (key, value) {
+                        $('#course').append('<option value=' + value.course_id + '>' + value.c_name + '</option>');
+                    });
+
+                    // $("#course").html(response);
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 }
             }
 
@@ -163,6 +187,17 @@
 
     });
 
+<<<<<<< HEAD
+=======
+    $("#batch").change(function () {
+        var batches = $("#batch").val();
+        if (batches == 'All')
+        {
+            $("#semester").val($("#semester option:eq(1)").val());
+        }
+    });
+
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
     $("#course").change(function () {
         var course = $(this).val();
         var degree = $("#degree").val();
@@ -183,10 +218,28 @@
 
                     }
                 });
+<<<<<<< HEAD
 
 
 
                 $("#batch").html(response);
+=======
+                $('#batch').find('option').remove().end();
+                $('#batch').append('<option value>Select</option>');
+                $('#batch').append('<option value="All">All</option>');
+                if (course == "All")
+                {
+                    $("#batch").val($("#batch option:eq(1)").val());
+                    $("#semester").val($("#semester option:eq(1)").val());
+                } else {
+
+                    var batch_value = jQuery.parseJSON(response);
+                    console.log(batch_value);
+                    $.each(batch_value, function (key, value) {
+                        $('#batch').append('<option value=' + value.b_id + '>' + value.b_name + '</option>');
+                    });
+                }
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
             }
         });
     });
@@ -231,11 +284,16 @@
                         },
                 resourcefile: {
                     required: true,
+<<<<<<< HEAD
 
                   extension: 'gif|jpg|png|jpeg|pdf|xlsx|xls|doc|docx|ppt|pptx|pdf|txt',
 
                     extension: 'gif|jpg|png|jpeg|pdf|xlsx|xls|doc|docx|ppt|pptx|pdf|txt',
 
+=======
+                    extension: 'gif|jpg|png|jpeg|pdf|xlsx|xls|doc|docx|ppt|pptx|pdf|txt',
+                    extension: 'gif|jpg|png|jpeg|pdf|xlsx|xls|doc|docx|ppt|pptx|pdf|txt',
+>>>>>>> a2c1d49b70e8b196b56b75d37ae854e2ae6d30e4
                 },
             },
             messages: {
